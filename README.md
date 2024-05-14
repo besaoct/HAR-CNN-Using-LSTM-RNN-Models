@@ -38,38 +38,53 @@ This introductory chapter has provided a comprehensive overview of the backgroun
 ## Chapter 2: Literature Review
 
 Human activity recognition has attracted considerable interest in research, particularly in the development of machine learning algorithms capable of accurately identifying various physical activities in real-time settings. This chapter provides a comprehensive overview of previous studies conducted in this field, highlighting the evolution of techniques and methodologies.
+The research for the creation of such a machine learning algorithm that can identify complex human physical activity in real time setting is still on going. There are various sensors that can be used to identify human activity. Accelerometers are commonly used as they include many features which help in activity classification.
+
+In [5], the authors went beyond extracting the basic statistical (mean, variance, etc) and spatial features (entropy and energy) present within accelerometer data, and used the first order derivative of an acceleration signal to distinguish the variations within the signal. The acceleration data was divided into overlapping frames with features computed for each individual frame, which were then used to classify the activities using classifiers like boosted decision stumps, support vector machine and regularized logistic regression, with the extra feature extraction method producing a 2.5 – 3% increase in the overall classification accuracies.
 
 **2.2 Feature Extraction Techniques**
 
 In [5], authors explored advanced feature extraction methods beyond basic statistical and spatial features present in accelerometer data. By leveraging the first-order derivative of acceleration signals and employing classifiers like boosted decision stumps, support vector machines, and regularized logistic regression, they achieved improved classification accuracies.
 
-In [6], a novel Haar-like filtering technique was proposed, demonstrating high accuracy in feature extraction from 3D acceleration signals. This method significantly reduced feature extraction costs and model redundancy, showcasing promising results for HAR applications.
+In [6], the authors proposed a new Haar-like filtering technique to use a difference filter combined with a variable filter to extract features from a 3D acceleration signal. A 1D filter with variable filter and shift width was used as the basis of Haar-like filtering. The resulting feature is the sum of the output Haar-like filtered signals with different shifted values and can be used on one axis only. An additional 1D Haar like filtering is carried out between the feature results from the two axes using the sum of their difference with appropriate shift values. An integral signal is introduced on to the final feature which concludes the overall Haar-like feature to be calculated using one addition, one subtraction and one bit-shift. The results produced an extremely high accuracy of 93.91%, reduced feature extraction costs by 21.22% comparatively, and resulted in a 17.8% less redundantly trained model.
 
 **2.3 Wearable Devices and Data Collection**
 
+The authors in [7] identified that human activity recognition using computer vision through video surveillance etc causes privacy invasion, and therefore used a single wearable device for their research – a method that can be used universally and hence is more appropriate. Volunteers for data collection wore a Microsoft band 2 on their wrist for sample collection. 1500 and 800 samples for each activity were left for training and validating the model, respectively. Different number of decision tree classifiers were used, with 30 being the number that gave the highest overall accuracy of 90%.
 Addressing privacy concerns associated with computer vision-based approaches, [7] utilized a single wearable device, the Microsoft Band 2, for data collection. Employing decision tree classifiers, they achieved a high overall accuracy of 90% in HAR tasks, emphasizing the universality and practicality of wearable devices for data acquisition.
 
-In contrast, [8] leveraged smartphone accelerometers for HAR, employing support vector machines and real-time tracking on Android phones. Their model achieved a remarkable accuracy of 93.38%, showcasing the potential of smartphones as ubiquitous sensing platforms for HAR.
-
-**2.4 Wearable Device-Based Approaches**
-
-Privacy concerns associated with video surveillance prompted researchers in [7] to adopt a single wearable device approach using a Microsoft Band 2. Through decision tree classifiers, they achieved a high overall accuracy of 90% in classifying human activities.
 
 **2.5 Smartphone Sensor Utilization**
 
-Contrary to wearable sensors, [8] utilized smartphone accelerometers for activity classification using support vector machines. By extracting multiple features and employing real-time processing on Android phones, their model attained an impressive accuracy of 93.38%.
+In contrast, [8] leveraged smartphone accelerometers for HAR, employing support vector machines and real-time tracking on Android phones. Their model achieved a remarkable accuracy of 93.38%, showcasing the potential of smartphones as ubiquitous sensing platforms for HAR. Compared to wearable sensors, researchers in [8] used a smartphone’s accelerometer to classify physical activity using a machine learning method called support vector machine and to track it in real time using an android phone (OS). Data from the accelerometer, gyroscope, and accelerometer sensor linearity were collected and pre-processed. Multiple features like mean, standard deviation, and energy of signal were extracted to train the algorithm. For the real time processing of data, an interval of 3-5 seconds was needed for the model to make a prediction. This new model got an accuracy of 93.38% when used on the validation dataset.
+
+The above-mentioned techniques such as support vector machine or random forest classification are not preferred anymore as they need handcrafted features which are time consuming and add external bias to the data. Therefore, nowadays deep learning algorithms like CNNs and RNN are preferred as they do not need hand crafted features and can make use of a sequence of data streams.
 
 **2.6 Emergence of Deep Learning Models**
 
 The rise of deep learning algorithms, particularly Convolutional Neural Networks (CNNs) and Long Short-Term Memory Recurrent Neural Networks (LSTM RNNs), has revolutionized activity recognition. Research in [9] showcased the superior performance of LSTM RNNs compared to traditional machine learning models.
+Research in [9] compared 9 different machine learning and deep learning algorithms to test their performance when it comes to human activity recognition. With more information fed available, deep learning models were deemed to almost always outperform machine learning models. The research concluded that deep learning models that utilised LSTM networks (explained in section 5.2) performed much better compared to other models.
+
 
 **2.7 Utilization of CNN and LSTM RNN Architectures**
 
+Researchers in South Korea [10] used a 1D CNN classifier to recognise human activity using a triaxial accelerometer’s data collected from user’s smartphones. The x, y, and z axis acceleration data were converted vector magnitudes and then fed into the neural network. It was then used to classify the user’s physical activity into three categories: walking, running, and staying still. The problem with normal human activity recognition is that the position of the device, e.g. user’s hand, user’s pocket, user’s bag, etc, can have a major impact on the rotational component within the triaxial acceleration data. To keep this to a minimum, the research team transformed the x, y, and z axis data into a single vector magnitude using the Euclidean norm x, y, and z using the following formula [10]: ||a|| = √(x^2 + y^2 + z^2)
+
 Studies in [10] and [11] demonstrated the effectiveness of CNN and LSTM RNN architectures in classifying human activities using accelerometer data from smartphones. In [10], researchers transformed the x, y, and z-axis data into a single vector magnitude using the Euclidean norm formula to enhance the robustness of the classification process.
+
+Another research in China [11] compared the performance of a Convolutional Neuron Network with a Support Vector Machine on 3D accelerometer data from a smartphone’s sensor to see which one performed better. The 3D accelerometer data was used to train the well-designed CNN whereas 6 different kinds of features were extracted from the accelerometer data before they were used to train the SVM. As this research used an accelerometer sensor that directly gave collected 3D data from a single sensor, it saved a lot of pre-processing time. The 1D CNN model outperformed the SVM as the CNN achieved an accuracy of 91.97% whereas the SVM managed to achieve only 82.27%.
+
+A different way to recognising short-time physical activity was considered in [12], where a CNN was trained with an over-complete pattern library full of activity patterns collected by a wearable device using a method called sliding window. The CNN used the over-complete pattern library to extract the robust features of the data from it and gave a 95.52% accuracy on a validation set.
+A different deep learning model commonly used now when working with time series data is LSTM RNN – Long Short-Term Memory Recurrent Neural Networks. Generally, CNNs are more commonly used in deep learning but because people are utilising the benefits of LSTM cells much better now, the use of RNNs is on the rise as well. A research team in South Africa [13] used a LSTM RNN deep neural network architecture to classify 6 different activities based on the WISDM dataset described in section 2. The 6 activities were jogging, sitting, standing, walking, walking upstairs and walking downstairs. The x, y, and z axis were transformed into segments that lasted 10 seconds and then fed into the neural network as input. This ensured that there was ample amount of time to assign the data to the most common activity group found in that interval. It is also an appropriate enough time as in general an activity is performed for a period of time. The data was split using an 80:20 ratio for training and testing, and the remaining training data was split again into training and testing data using an 80:20 ratio – in order to have a validation dataset. Random selections of the training data were sub-sampled, used to train the model and tested on the validation set [13]. The model achieved results up to an accuracy of 90% after experimentation with different parameters.
+
 
 **2.8 Enhancements in Model Performance**
 
 To address computational complexity and speed concerns, researchers in [14] proposed multi-layer parallel LSTM RNN models, achieving high accuracies while reducing computational complexity. Additionally, [15] explored data parallelism techniques on cloud computing platforms, resulting in significant computational time savings.
+
+In [14], researchers looked at producing a multi-layer parallel LSTM RNN model that could classify human activity using smartphone sensor data. Their findings produced better results than traditional machine learning methods and also matched the results produced generally by CNNs as their LSTM model got an accuracy of 94%. However, they also found LSTM RNNs were much less computationally complex than CNNs. The computational complexity of the network decreased with the number of parallel LSTM units. From this it was understood that increasing the number of neurons in a parallel LSTM unit bumped up the performance of the network slightly.
+As the number of trainable parameters increase with the bigger data that is available to us, there is also a need of increasing the speed of the process of human activity recognition so that it can be readily available with real time processing. Researchers in [15] did exactly that by utilising a technique called data parallelism – distributing the data across different nodes, performing forward and backward propagation on them in parallel, with the gradients from the backpropagation averaged over all nodes as they are used to update the model of each single node, thus speeding up the whole process – on cloud computing using Kubernetes containers.
+They trained and ran a LSTM RNN model on online CPUs and GPU and analysed how this improved model learning performance. Their experiments proved how this technique is practical enough, as it reduced computational time by up to 10 times less on an online CPU and GPU using a Kubernetes container, than on a local CPU or GPU.
 
 This literature review underscores the diverse methodologies and advancements in HAR research, spanning from feature extraction techniques to deep learning approaches and scalability enhancements. By synthesizing insights from previous works, this chapter sets the stage for the subsequent analysis and development of novel HAR methodologies in this major project.
 
@@ -107,9 +122,40 @@ By following these steps outlined in the approach and methodology, this study ai
 
 ## Chapter 4: Datasets
 
-**Chapter 5: Theoretical Background**
+**4.1 SPHERE dataset**
 
-Convolutional Neural Networks (CNNs):
+The dataset provided by the SPHERE competition will be used to train the algorithm. The data available was measured on 10 people wearing accelerometers on their wrists performing multiple activities inside a designated location where they were monitored using RGB-Depth cameras. The video footage was used to classify their physical activities during the time they were monitored.
+Each participant was monitored for almost 30 minutes and so the data available is of approximately 5 hours. The accelerometer measured data at a sampling rate of 20 Hz and in the range of ± 8g. The physical activities are classified into 22 different categories: ascending stairs, descending stairs, jumping, walking with a load, walking, bending, kneeling, lying, sitting, squatting, standing, standing to bending, kneeling to standing, lying to sitting, sitting to lying, sitting to standing, standing to kneeling, standing to sitting, bending to standing, and turning.
+These 22 different activities come under 3 umbrella terms – ambulation activity (activity that requires continuous movement), static postures (when participants are stationary), and posture to posture transitions. These 22 different categories will be combined into 5 main categories for the purpose of training the model: walking, walking upstairs, walking downstairs, sitting, and standing.
+
+**4.2 WISDM dataset**
+
+WISDM dataset is collected and provided by the Wireless Sensor Data Mining Lab which had collected the data from 36 different users using triaxial accelerometers. The sampling rate for its measured data is 20 Hz and the range within which the accelerometer measured the values is ± 2g. This dataset classified the physical activities into 6 different ones: walking, walking upstairs, walking downstairs, jogging, sitting and standing. When testing the algorithm on this labelled dataset, the jogging data will be removed as the algorithm will not have been trained on that data so will be unable to predict it from the accelerometer values. The distribution of these classes is as follows:
+
+
+| Activity          | Number of Samples | Proportion |
+|-------------------|-------------------|------------|
+| Walking           | 424,400           | 38.6%      |
+| Jogging           | 342,177           | 31.2%      |
+| Walking Upstairs  | 122,869           | 11.2%      |
+| Walking Downstairs| 100,427           | 9.1%       |
+| Sitting           | 59,939            | 5.5%       |
+| Standing          | 48,395            | 4.4%       |
+
+Table 1. The distribution of Activities within the WISDM dataset
+
+
+SPHERE’s dataset originally contained 22 different activities. They were combined into lesser number of categories in total because there are very few datasets available to validate this model based on those 22 different categories. As different datasets use different activities, the final number of activities that the training dataset should be combined into would depend on the dataset the model is to be validated on. The WISDM dataset contains 6 different activities – walking, jogging, standing, sitting, walking upstairs and walking downstairs. The WISDM dataset is generally considered very reliable when it comes to human activity recognition based on the number of researchers that have used it in their deep learning models. Therefore, it was chosen as the validation dataset and the activities of the training dataset were then to be combined accordingly. As there is no data present for jogging within the SPHERE dataset, the final 5 activities were chosen to be walking, standing, sitting, walking upstairs, and walking downstairs. Figure 1 below shows an example of what the triaxial accelerometer values look like for a physical activity.
+
+![Figure 1. An example to show the accelerometer values of a physical activity](./data/images/fig1.png)
+
+Figure 1. An example to show the accelerometer values of a physical activity
+
+
+
+## Chapter 5: Theoretical Background
+
+**5.1 Convolutional Neural Networks (CNNs)**
 Convolutional Neural Networks are a type of neural networks primarily employed for image recognition tasks. They utilize the concept of local receptive fields to identify specific features within the input image, aiding in its classification among a set of diverse images. CNNs consist of multiple layers including the pooling layer, non-linearity layer, convolutional layer, and fully connected layer [16]. The term "convolutional" originates from the mathematical operation of convolution, where two functions combine to generate a third function. In this context, the input is convolved with a filter comprising trainable weights, which are adjusted using backpropagation, ultimately producing a feature map.
 
 The convolutional layer contains parameters (weights), whereas layers like pooling and fully connected layers do not [16]. This characteristic significantly enhances the performance of CNNs compared to traditional artificial neural networks by reducing the overall number of parameters. Structurally, a CNN comprises three main layers:
