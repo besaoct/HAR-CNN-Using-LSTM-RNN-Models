@@ -1,4 +1,4 @@
-# HAR-CNN-Using-LSTM-RNN-Models
+# HAR Using CNN and LSTM RNN Models
 
 
 ## Abstract:

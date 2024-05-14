@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-#For User 1
+#For User 1 ---
 
 User_1 = pd.read_csv('acceleration_labelled_data.csv')
 User_1 = pd.DataFrame(User_1.iloc[:, 1:6].values)
