@@ -1,4 +1,4 @@
-# HAR Using CNN and LSTM RNN Models
+# Human Activity Recognition Using CNN and LSTM RNN Models
 
 
 ## Abstract:
