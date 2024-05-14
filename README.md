@@ -278,15 +278,111 @@ In a larger confusion matrix, the best results are when the left top to right bo
 
 **6.1 Application of Neural Networks on Labelled Dataset**
 
-6.1.1 Analysis of Neural Networks using Layer-wise Relevance Propagation (LRP)
-   - Implementation of LRP: Layer-wise Relevance Propagation (LRP) technique will be applied to interpret the decisions made by the neural networks during the classification process.
-   - Relevance Analysis: LRP will be used to analyze the relevance of input features to the final classification decision, providing insights into which features contribute most significantly to the predicted human activities.
-   - Interpretation of Results: The results obtained from LRP analysis will be interpreted to understand the neural networks' decision-making process and identify the key features influencing the classification outcomes.
+6.1.1 Method and Evaluation of CNN
 
-6.1.2 Evaluation and Discussion
-   - Performance Metrics: Various performance metrics such as accuracy, precision, recall, and F1 score will be calculated to evaluate the effectiveness of the CNN and LSTM RNN models in predicting human activities.
-   - Comparative Analysis: The performance of the CNN and LSTM RNN models on the labelled dataset will be compared to assess their respective strengths and weaknesses.
-   - Discussion of Findings: The findings from the evaluation will be discussed in detail, highlighting any notable differences in performance between the two classifiers and providing insights into their performance characteristics.
+The following diagram describes the architecture and parameters used in the Convolutional Neural Network created for this project:
+
+![Figure](./data/images/fig8.png)
+Figure 8. CNN model architecture 
+
+The parameters of each layer from figure 8 are described below:
+
+- Input: As acceleration from the smart device it was measured from is recorded as time series data, we need to prepare and provide it to the CNN as a 2-dimensional input. The first dimension being time and the second being the acceleration’s value. The following diagram shows how this is achieved:
+
+![Figure](./data/images/fig9.png)
+Figure 9. Kernel sliding over input data
+
+- Convolution Layers: The acceleration values pre-processed into a 2D structure is then fed into the two convolutional layers. The first convolutional layer has_____convolutional filters, has a kernel size of 5 and uses the relu activation function. Similarly, the second convolutional layer also has a kernel size of 5, also uses the relu activation function, however, has a convolutional filter of 	. Stride, which refers to how many pixels the kernel shifts by, is 1. A dropout rate of 0.1 is used with the first convolution layer and a dropout rate of 0.2 is used with the second convolution layer.
+
+- Maxpooling layer: The pooling layer has a size of 2. This reduces the number of feature maps by____.
+
+- Fully connected dense layer: The output from the Maxpooling layer is supposed to be flattened. It is then fed into a densely connected layer of 100 neurons. A dropout rate of 0.5 is used with this layer to avoid overfitting. Another dense layer representing the output layer is added with only 5 neurons used – representing the 5 output activities the neural network is supposed to classify. At this stage a softmax activation function is used to compute the likelihood of which output activity the data at the current iteration most likely represents
+
+The programming code for this project was written in python using an IDE called Spyder. An open source library called Keras was used to implement the architecture shown above [33]. A sequential model was used for the implementation as it allows for a model to be created and then layers to be added to it later on. It greatly simplifies creating deep learning models. 1D convolution layers, 1D maxpooling layer, flattening layer, dropout and dense layers were added to the sequential model. The parameters of each of these layers have already been explained previously.
+The model was implemented on a 2.3 GHz Dual-Core Intel Core i5 CPU with 8 GB 2133 MHz LPDDR3 memory. The model was trained for 100 epochs with a batch size of 32. The Adam optimizer was used to compile and optimize the model by calculating the gradients of the parameters at each layer, calculating the error between the correct value and predicted value using the sparse categorical cross-entropy loss function, and then finally updating the weights using the default learning rate of 0.001. The sparse categorical cross-entropy function is a normal loss function that calculates the error between the prediction and the correct value but uses the labels instead of a one-hot encoded scheme. The learning rate is a hyperparameter which decides how much to change the weights of the model by at each iteration. The larger it is the bigger the changes.
+The model was trained on the dataset provided by the SPHERE competition. As mentioned in section 2, it contained data for 10 people. This dataset was split into two parts: 8 people’s data was used to train the model and 2 people’s data was used to test the model. In this way the model does not get to see the data of the testing set and therefore when that dataset is used for testing, the model will give results that reflect the real-world scenario.
+
+Before the accelerometer values and the activity labels are fed into the CNN, the training dataset is resampled at the same frequency its data was collected at: 20 Hz. The data collected in the real world will have some small errors when it comes to what frequency it is collected at. When the neural network is being trained, it is important that there is no discrepancy in the data it is being trained from. The accelerometer’s values were resampled using the interpolation function present in the SciPy library [34]. The interpolation function allows for then any missing values to be filled as well using an extrapolation feature.
+As described in section 2.2, the 22 different activities within the SPHERE dataset were combined into 5 different activities. The accelerometer values and the corresponding activity labels were then created into segments and labels. The segments contained the accelerometer values for the x, y and z axis, while the labels contained the corresponding physical activities. To generate these features, a time step of 200 was used and whichever activity was the most common in each time step, the segment was assigned that activity as it’s label. A time step of 200 was chosen as it corresponds to 10 seconds of performing an activity. Any physical activity is always performed for a period of time and not for only an instance. Therefore 10 seconds is considered an appropriate length of time for a label to be added to that segment.
+The CNN model gets an accuracy of up to 75% on the testing dataset. The overall performance of the CNN can be seen in the confusion matrix in figure 10. The confusion matrix shows both, the absolute value and the normalised value of the predictions. Even though the classifier’s accuracy is about 75%, the overall performance cannot be considered satisfactory. There is a large discrepancy between the results of each individual activity. The maximum accuracy achieved is for standing activity with 83%. Whereas for walking upstairs and downstairs the classified performed extremely poorly.
+There can be many reasons for these misclassifications. One of the important factors is that within our original dataset and our testing dataset, activities like standing and sitting, both of which were classified to a higher accuracy compared to the rest, were more densely present compared to activities like walking, walking upstairs and walking downstairs. In the testing set, there were 1944 samples of standing whereas only 25 samples of walking upstairs.
+
+![Figure](./data/images/fig10.png)
+Figure 10. Confusion Matrix of classifier’s predictions on SPHERE Testing Set
+
+The interesting feature of these results is that stationary activities like standing and sitting have a much higher accuracy than mobile activities like walking etc. This could be as a result of the fact that when a person is sitting or standing, they perform less movement of their wrists – where the accelerometer was placed. Whereas, when the said person would be moving, their wrist position can change quite a lot, and this can cause the accelerometer values to change drastically – thus not allowing for a pattern to be recognisable. Walking upstairs or downstairs are either predicted as walking or standing – both of which are positions where the wrist positions of people might be similar to not only each other but to walking upstairs or downstairs as well. The positive result over here is that it doesn’t classify either of walking upstairs or downstairs as sitting – a position where the posture and wrist position must be very different compared to the rest. Therefore, the classifier can identify a pattern with stationary activities but is unable to do so with mobile activities.
+
+Moving from the testing set to the validation set, the classifier’s consistency in performance is key. On the WISDM dataset, the classifier gets an accuracy of 21.5%. From figure 11, we can see that he CNN is only able to track the sitting activity really well – with an accuracy of 98%. Just like it did for the testing set, it identifies walking, walking upstairs and walking downstairs as ‘standing’ as it perhaps is unable to identify the differences between them. The negative feature over here is that it identifies the standing activity as sitting, which didn’t happen with the testing set.
+
+![Figure](./data/images/fig11.png)
+Figure 11. Confusion Matrix of classifier’s prediction on validation set: WISDM datase
+
+![Figure](./data/images/fig12.png)
+Figure 12. Graph the accuracy of the models against the number of epochs
+
+
+Figure 12 show how well the model learned on the test data as the number of epochs were increased. The model shows that it learns well over time as the accuracy on the training set increases from 70% to 97% over 100 epochs, although there is not much improvement after 20 epochs. Moreover, the accuracy on the testing set does not improve in this range of epochs. The model seems to be consistent in its accuracy on the testing set as it remains approximately at 75%.
+
+Figure 13. Graph of the loss function of the CNN against number of epochs
+
+Figure 13 shows how the cost function of the model’s loss value changes over time. The loss for the training set reduces over time whereas the loss for the testing set increases. This points out to the fact that the model may be being overfitted on the data. A solution to this problem is to increase the value of dropout and to reduce the size of the network by reducing the number of layers.
+
+Therefore, the value of dropout was increased from 0.2 to 0.5 and the second convolutional layer was removed. The two solutions were performed individually in order for the effects to be observed. Increasing the dropout reduced the difference in the loss functions of the training and testing data. The overall performance on each activity was not majorly affected either and the model produced similar results. However, when the second convolutional layer was reduced, the overall accuracy of the program did not get affected, however its performance on individual activities was reduced as only the standing activity was predicted to a high accuracy. This points towards the model not being able to learn the patterns of each activity correctly. Hence only the dropout was increased to 0.5, the epochs were reduced from 100 to 20, but the number of convolutional layers were kept the same.
+These changes did not drastically change the model’s performance on the testing set – as it only improved the overall accuracy from 75% to 76%. However, the model’s performance on the validation set improved from 21% to 30%. This improvement on the validation set was reflected in different activities – walking’s accuracy improved from 21% to 32%, standing’s accuracy improved from 26% to 39%, sitting’s accuracy remained the same, while walking upstairs and downstairs had a few samples predicted correctly even though as a percentage it was less than 5% for both.
+
+6.1.2 Method and Evaluation of LSTM RNN
+
+The stacked architecture of the LSTM used for the multiple classification of Human Activity Recognition can be seen in the following schematic:
+
+![Figure](./data/images/fig14.png)
+Figure 14. Stacked Architecture of LSTM RNN model used
+
+The parameters used in the above architecture are explained below:
+
+- Input: The accelerometer data recorded to train the model is in the form of time series data. It is important for the LSTM within the model that this data is prepared appropriately for it. The 3 axis accelerometer data needs to be reshaped into a parallel 3D structure – as is needed to efficiently build and train the LSTM network. 200 samples were fed into the network to form a segment or a group. The value chosen as the label for a group of sampled data is based on the mode – the most commonly occurring label – within said group. The previous 199 samples would act as memory for the LSTM network.
+- LSTM Layer: Four LSTM network layers were added to the network. Each layer had 100 units or neurons added to them. Dropout of 25% was added to each individual LSTM layer to prevent overfitting.
+Batch Normalization: As mentioned in section 3.2, batch normalization helps in speeding up the training process hence batch normalization is added to the model.
+- Fully connected layer: A dense layer is added to complete the model. 5 units are added to this layer to represent the 5 different classifications.
+
+
+This architecture was implemented using Python and Keras – an open source library for building neural networks [33]. A sequential model was used with multiple LSTM, Dense, Dropout and Batch Normalisation layers. The input layer had 100 neurons, with 3 more LSTM layers stacked on to it in order to allow for the establishment of a pattern and dependencies between the input data and the corresponding activities. An output layer with 5 neurons for the 5 different classification was added at the end. The final model is then trained for 100 epochs using the Adam optimizer, with the default learning rate of 0.002 and the loss function of mean squared error. The model is trained ofline on a CPU 2.3 GHz processing power, Dual-Core Intel Core i5 with 8GB memory. However, it would take more than 6 to 7 hours to train the LSTM RNN model as the MacBook’s CPU was not powerful enough. Therefore, when testing and running the algorithm, Google Cloud Platform’s virtual machines were also used to speed up that procedure. The virtual machine had 2 vCPUs with 13 Gb memory and also had 4 NVIDIA Tesla P100 GPUs which boasted its performance. The rest of the procedure in terms of pre-processing, testing, training and validating the classifier was exactly the same as the procedure used for the CNN model to maintain consistency across both models. 8 people’s data from the SPHERE competition was used to train the algorithm, 2 people’s data was used to test it and then finally the WISDM dataset was used to validate the model.
+The LSTM RNN got an accuracy of between 65 and 70% when it was compiled multiple times. The results can be analysed for each individual activity using the confusion matrix from figure 15. The LSTM model has the same trend as the CNN model where it is able to classify stationary activities such as sitting and standing to a good extent but struggles with activities involving lots of motion like walking, walking upstairs and walking downstairs.
+
+![Figure](./data/images/fig15.png)
+Figure 15. Confusion Matrix of LSTM model’s results on the testing set
+
+![Figure](./data/images/fig16.png)
+Figure 16. Confusion Matrix of LSTM model’s predictions on the validation data.
+
+Contrary to the performance of the CNN on the validation dataset, the LSTM model performed better as it achieved an accuracy between 42 to 50 % on multiple runs. It’s performance on individual activities as well is not that different than its performance on them in the testing dataset. From figure 16 we see that the accuracy on walking improved from 24% on the testing set to 57% on the validation set, the accuracy on sitting improved from 62% to 89%, however the accuracy of standing went from 75% to 43%. The model was unable to identify walking upstairs and downstairs at all in both datasets – testing and validation. There can be many different reasons for the results obtained. Compared to the CNN model, the LSTM RNN model has a higher accuracy on the validation dataset. This confirms the theoretical assumption before these models were made that LSTM RNNs are better at classifying time series data the CNNs. However, this might also be the reason that the LSTM model is unable to classify activities like walking upstairs and downstairs. The LSTM model utilises its ‘memory’ of a certain number of previous samples when making a prediction on the current sample. Walking upstairs and downstairs are activities that are not abundantly present in the training dataset and do not last for a long time either compared to activities like sitting etc. This could be a major factor for why the model is unable to properly learn and classify it. For walking both models perform almost the same with the CNN getting a 98% accuracy and the LSTM RNN getting an 89% accuracy. But for walking and standing the LSTM RNN performs much better than the CNN, with the accuracy of walking going from 21% with the CNN to 57% with the LSTM RNN, and the accuracy of standing going from 26% with the CNN to 43% with the LSTM RNN.
+
+
+![Figure 17. Accuracy of the LSTM model against the number of epochs](./data/images/fig17.png)
+Figure 17. Accuracy of the LSTM model against the number of epochs.
+
+![Figure 18. Graph of the loss function of the LSTM model the against number of epochs](./data/images/fig17.1.png)
+Figure 18. Graph of the loss function of the LSTM model the against number of epochs
+
+Figure 17 shows how the accuracy of the model on the training and testing set changed over the range of epochs. The model’s peak accuracy on the training set comes around 40-50 epochs where there is less disparity between the testing set accuracy and the training set accuracy. Therefore, to reduce the disparity between the loss functions and maintain a good accuracy, the number of epochs were reduced to 42 which improved the overall accuracy. Multiple runs must also be performed by increasing the dropout to observe the effects of that on the accuracy. However as one run of the model takes a long time to execute not only on the local computer used but also on a virtual machine on google cloud, time constraints inhibited the completion of this experimentation.
+
+6.1.3 Analysis of Neural Networks using Layer-wise Relevance Propagation (LRP)
+
+The LRP technique, as described in section 3.4, is used to analyse the decision making of a neural network. The innvestigate library was used to analyse the model [35]. Due to the limitation of LRP, it is only possible to apply it to the CNN model. LRP was applied to 2 neurons within the CNN for each outcome from the testing set to understand how well the model followed the value of the accelerometer from each axis. The test set is pretty large and the ofline machine that the model is compiled on was deemed not powerful enough to run the analysis on the whole set. Therefore, due to time and CPU resources being an issue, the LRP technique was only applied to two neurons in two limited parts of the testing set: accurately predicted activity of standing (83%) and relatively inaccurately predicted activity of walking (35%). It was only applied to both activities for about 10 continuous samples.
+
+The figure 19 below shows the LRP relevance for a correctly predicted sample of walking using the 200 different values of the accelerometer within the sample. It can be observed that the model does not identify much of a pattern using either x, y or z axis values as the relevance from each of them is extremely low throughout majority of the sample.
+
+![Figure 19. Graph showing the relevance between the accelerometer’s values and the predicted outcome](./data/images/fig18.png)
+
+Figure 19. Graph showing the relevance between the accelerometer’s values and the predicted outcome
+
+This can now be compared with the figure 19 below which shows the relevance scores for the activity of standing. The LRP relevance scores for each value within the sample is much higher on average than the relevance scores for walking. This is not surprising as there is much less noise in the accelerometer data for standing compared to walking. The stability within standing’s data allows the model to learn the patterns much better than on walking’s data and hence the higher relevance scores for the LRP.
+
+![Figure 20. Graph showing the relevance between the accelerometer’s values and the predicted outcome of standing](./data/images/fig19.png)
+
+Figure 20. Graph showing the relevance between the accelerometer’s values and the predicted outcome of standing.
+
+A lot more analysis can be carried out using LRP. Due to reasons mention at the start of the report in appendix A, it was not possible to continue further analysis. These further steps will be mentioned in section 5.3 as future work that can be carried out.
+
 
 **6.2 Testing on Unseen Data**
 
@@ -312,6 +408,7 @@ By conducting a comprehensive analysis of the results obtained from the applicat
 7.1 Conclusion
 
 In this Final Year individual project two different classifiers, an LSTM RNN and a 1D CNN, were looked at to see how each of them perform when it comes to Human Activity Recognition using accelerometer data. Both networks were trained on the SPHERE dataset, tested on the SPHERE dataset and then validated using WISDM’s dataset. The activities they were trained and tested on were both stationary (sitting and standing) and mobile (walking, walking upstairs, walking downstairs). These activities were chosen as they last for a few seconds and then therefore a correlation between the activity and the accelerometer value may be established by the Neural Networks.
+
 From the results the preconceived notion that Long Short-Term Memory Cell Recurrent Neural Networks perform better on time series data than 1D Convolutional Neural Network got proven further. The results can be summarized below:
 
 - In general, both networks worked to a satisfactory accuracy – up to 70% for the LSTM RNN and 75% for the CNN – when tested on dataset that it was trained on.
@@ -320,14 +417,15 @@ From the results the preconceived notion that Long Short-Term Memory Cell Recurr
 
 7.2 Limitation
 
-The classifier is trained on SPHERE’s dataset which is sampled at 20 Hz. The WISDM dataset is also sampled at 20 Hz so this is not a problem here, but if other datasets are used for testing and those datasets have values sampled at a higher rate, they will have to be down sampled which will result in a loss of information. This is one of the limitations of this project in terms of future work.
-Another limitation of this work is that the trained and test dataset were both different in terms of the activities they had present in them, with the SPHERE dataset initially having 22 different classification and the WISDM dataset having 6 different classifications.
-Both neural networks need to be fully analysed using techniques like LRP – Layer-wise relevance propagation – to fully understand how or why they are making decisions the way they are. However, as this is very new research in terms of LSTM RNNs, it couldn’t be implemented on it. This method will be applied to the CNN and if there are further steps needed and isn’t completed, those will be mentioned as steps that were not possible to be implemented considering the time limited schedule of the Individual Project.
+- The classifier is trained on SPHERE’s dataset which is sampled at 20 Hz. The WISDM dataset is also sampled at 20 Hz so this is not a problem here, but if other datasets are used for testing and those datasets have values sampled at a higher rate, they will have to be down sampled which will result in a loss of information. This is one of the limitations of this project in terms of future work.
+- Another limitation of this work is that the trained and test dataset were both different in terms of the activities they had present in them, with the SPHERE dataset initially having 22 different classification and the WISDM dataset having 6 different classifications.
+- Both neural networks need to be fully analysed using techniques like LRP – Layer-wise relevance propagation – to fully understand how or why they are making decisions the way they are. However, as this is very new research in terms of LSTM RNNs, it couldn’t be implemented on it. This method will be applied to the CNN and if there are further steps needed and isn’t completed, those will be mentioned as steps that were not possible to be implemented considering the time limited schedule of the Individual Project.
 
 7.3 Future Work
 
-In the future, the datasets that must be chosen for training and testing of the classifiers must be chosen wisely. It is better for training and testing datasets to be as similar as possible in order to understand if the classifier is built and trained properly. However, this will limit the generalisation capability of the classifier.
-The dataset chosen for training should have each activity present in relatively equal proportions. This might not be possible as human beings perform each activity on a different proportion daily, however in terms of training the classifier this has an adverse effect as classifiers are unable to identify the activities that are rarely performed due to lack of training data
+- In the future, the datasets that must be chosen for training and testing of the classifiers must be chosen wisely. It is better for training and testing datasets to be as similar as possible in order to understand if the classifier is built and trained properly. However, this will limit the generalisation capability of the classifier.
+
+- The dataset chosen for training should have each activity present in relatively equal proportions. This might not be possible as human beings perform each activity on a different proportion daily, however in terms of training the classifier this has an adverse effect as classifiers are unable to identify the activities that are rarely performed due to lack of training data
 
 _References_
 
