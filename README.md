@@ -269,6 +269,7 @@ Where TP represents true positive – number of positive records that were corre
 - The confusion matrix – it is a technique which helps in summarizing the results and the performance of a machine learning classifier. It uses the same 4 values that the accuracy function uses – TP, TN, FP, and FN. A simple 2 x 2 interpretation of a confusion matrix is described in the table below:
 
 ![alt text](./data/images/fig7.png)
+
 Figure 7. A 2 x 2 sample Confusion Matrix
 
 In a larger confusion matrix, the best results are when the left top to right bottom diagonal are the boxes with the most values as they signify the correct predictions.
@@ -278,11 +279,12 @@ In a larger confusion matrix, the best results are when the left top to right bo
 
 **6.1 Application of Neural Networks on Labelled Dataset**
 
-6.1.1 Method and Evaluation of CNN
+**6.1.1 Method and Evaluation of CNN**
 
 The following diagram describes the architecture and parameters used in the Convolutional Neural Network created for this project:
 
 ![Figure](./data/images/fig8.png)
+
 Figure 8. CNN model architecture 
 
 The parameters of each layer from figure 8 are described below:
@@ -290,6 +292,7 @@ The parameters of each layer from figure 8 are described below:
 - Input: As acceleration from the smart device it was measured from is recorded as time series data, we need to prepare and provide it to the CNN as a 2-dimensional input. The first dimension being time and the second being the acceleration’s value. The following diagram shows how this is achieved:
 
 ![Figure](./data/images/fig9.png)
+
 Figure 9. Kernel sliding over input data
 
 - Convolution Layers: The acceleration values pre-processed into a 2D structure is then fed into the two convolutional layers. The first convolutional layer has_____convolutional filters, has a kernel size of 5 and uses the relu activation function. Similarly, the second convolutional layer also has a kernel size of 5, also uses the relu activation function, however, has a convolutional filter of 	. Stride, which refers to how many pixels the kernel shifts by, is 1. A dropout rate of 0.1 is used with the first convolution layer and a dropout rate of 0.2 is used with the second convolution layer.
@@ -308,6 +311,7 @@ The CNN model gets an accuracy of up to 75% on the testing dataset. The overall 
 There can be many reasons for these misclassifications. One of the important factors is that within our original dataset and our testing dataset, activities like standing and sitting, both of which were classified to a higher accuracy compared to the rest, were more densely present compared to activities like walking, walking upstairs and walking downstairs. In the testing set, there were 1944 samples of standing whereas only 25 samples of walking upstairs.
 
 ![Figure](./data/images/fig10.png)
+
 Figure 10. Confusion Matrix of classifier’s predictions on SPHERE Testing Set
 
 The interesting feature of these results is that stationary activities like standing and sitting have a much higher accuracy than mobile activities like walking etc. This could be as a result of the fact that when a person is sitting or standing, they perform less movement of their wrists – where the accelerometer was placed. Whereas, when the said person would be moving, their wrist position can change quite a lot, and this can cause the accelerometer values to change drastically – thus not allowing for a pattern to be recognisable. Walking upstairs or downstairs are either predicted as walking or standing – both of which are positions where the wrist positions of people might be similar to not only each other but to walking upstairs or downstairs as well. The positive result over here is that it doesn’t classify either of walking upstairs or downstairs as sitting – a position where the posture and wrist position must be very different compared to the rest. Therefore, the classifier can identify a pattern with stationary activities but is unable to do so with mobile activities.
@@ -315,9 +319,11 @@ The interesting feature of these results is that stationary activities like stan
 Moving from the testing set to the validation set, the classifier’s consistency in performance is key. On the WISDM dataset, the classifier gets an accuracy of 21.5%. From figure 11, we can see that he CNN is only able to track the sitting activity really well – with an accuracy of 98%. Just like it did for the testing set, it identifies walking, walking upstairs and walking downstairs as ‘standing’ as it perhaps is unable to identify the differences between them. The negative feature over here is that it identifies the standing activity as sitting, which didn’t happen with the testing set.
 
 ![Figure](./data/images/fig11.png)
+
 Figure 11. Confusion Matrix of classifier’s prediction on validation set: WISDM datase
 
 ![Figure](./data/images/fig12.png)
+
 Figure 12. Graph the accuracy of the models against the number of epochs
 
 
@@ -330,11 +336,12 @@ Figure 13 shows how the cost function of the model’s loss value changes over t
 Therefore, the value of dropout was increased from 0.2 to 0.5 and the second convolutional layer was removed. The two solutions were performed individually in order for the effects to be observed. Increasing the dropout reduced the difference in the loss functions of the training and testing data. The overall performance on each activity was not majorly affected either and the model produced similar results. However, when the second convolutional layer was reduced, the overall accuracy of the program did not get affected, however its performance on individual activities was reduced as only the standing activity was predicted to a high accuracy. This points towards the model not being able to learn the patterns of each activity correctly. Hence only the dropout was increased to 0.5, the epochs were reduced from 100 to 20, but the number of convolutional layers were kept the same.
 These changes did not drastically change the model’s performance on the testing set – as it only improved the overall accuracy from 75% to 76%. However, the model’s performance on the validation set improved from 21% to 30%. This improvement on the validation set was reflected in different activities – walking’s accuracy improved from 21% to 32%, standing’s accuracy improved from 26% to 39%, sitting’s accuracy remained the same, while walking upstairs and downstairs had a few samples predicted correctly even though as a percentage it was less than 5% for both.
 
-6.1.2 Method and Evaluation of LSTM RNN
+**6.1.2 Method and Evaluation of LSTM RNN**
 
 The stacked architecture of the LSTM used for the multiple classification of Human Activity Recognition can be seen in the following schematic:
 
 ![Figure](./data/images/fig14.png)
+
 Figure 14. Stacked Architecture of LSTM RNN model used
 
 The parameters used in the above architecture are explained below:
@@ -349,18 +356,22 @@ This architecture was implemented using Python and Keras – an open source libr
 The LSTM RNN got an accuracy of between 65 and 70% when it was compiled multiple times. The results can be analysed for each individual activity using the confusion matrix from figure 15. The LSTM model has the same trend as the CNN model where it is able to classify stationary activities such as sitting and standing to a good extent but struggles with activities involving lots of motion like walking, walking upstairs and walking downstairs.
 
 ![Figure](./data/images/fig15.png)
+
 Figure 15. Confusion Matrix of LSTM model’s results on the testing set
 
 ![Figure](./data/images/fig16.png)
+
 Figure 16. Confusion Matrix of LSTM model’s predictions on the validation data.
 
 Contrary to the performance of the CNN on the validation dataset, the LSTM model performed better as it achieved an accuracy between 42 to 50 % on multiple runs. It’s performance on individual activities as well is not that different than its performance on them in the testing dataset. From figure 16 we see that the accuracy on walking improved from 24% on the testing set to 57% on the validation set, the accuracy on sitting improved from 62% to 89%, however the accuracy of standing went from 75% to 43%. The model was unable to identify walking upstairs and downstairs at all in both datasets – testing and validation. There can be many different reasons for the results obtained. Compared to the CNN model, the LSTM RNN model has a higher accuracy on the validation dataset. This confirms the theoretical assumption before these models were made that LSTM RNNs are better at classifying time series data the CNNs. However, this might also be the reason that the LSTM model is unable to classify activities like walking upstairs and downstairs. The LSTM model utilises its ‘memory’ of a certain number of previous samples when making a prediction on the current sample. Walking upstairs and downstairs are activities that are not abundantly present in the training dataset and do not last for a long time either compared to activities like sitting etc. This could be a major factor for why the model is unable to properly learn and classify it. For walking both models perform almost the same with the CNN getting a 98% accuracy and the LSTM RNN getting an 89% accuracy. But for walking and standing the LSTM RNN performs much better than the CNN, with the accuracy of walking going from 21% with the CNN to 57% with the LSTM RNN, and the accuracy of standing going from 26% with the CNN to 43% with the LSTM RNN.
 
 
 ![Figure 17. Accuracy of the LSTM model against the number of epochs](./data/images/fig17.png)
+
 Figure 17. Accuracy of the LSTM model against the number of epochs.
 
 ![Figure 18. Graph of the loss function of the LSTM model the against number of epochs](./data/images/fig17.1.png)
+
 Figure 18. Graph of the loss function of the LSTM model the against number of epochs
 
 Figure 17 shows how the accuracy of the model on the training and testing set changed over the range of epochs. The model’s peak accuracy on the training set comes around 40-50 epochs where there is less disparity between the testing set accuracy and the training set accuracy. Therefore, to reduce the disparity between the loss functions and maintain a good accuracy, the number of epochs were reduced to 42 which improved the overall accuracy. Multiple runs must also be performed by increasing the dropout to observe the effects of that on the accuracy. However as one run of the model takes a long time to execute not only on the local computer used but also on a virtual machine on google cloud, time constraints inhibited the completion of this experimentation.
@@ -427,12 +438,12 @@ From the results the preconceived notion that Long Short-Term Memory Cell Recurr
 
 - The dataset chosen for training should have each activity present in relatively equal proportions. This might not be possible as human beings perform each activity on a different proportion daily, however in terms of training the classifier this has an adverse effect as classifiers are unable to identify the activities that are rarely performed due to lack of training data
 
-_References_
+### _References_
 
-1. J. A. Knight, “Physical Inactivity: Associated Diseases and Disorders,” 2012. [Online]. Available: http://www.annclinlabsci.org/content/42/3/320.full. [Accessed 15th January 2024].
-2. M. A. Harris, “The relationship between physical inactivity and mental wellbeing: Findings from a gamification-based community-wide physical activity intervention,” 16 January 2018. [Online]. Available: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5774736/. [Accessed 17th February 2024].
-3. M. E. Donaghy, “Exercise can seriously improve your mental health: Fact or fiction?,” 6 March 2007. [Online]. Available: https://www.tandfonline.com/doi/full/10.1080/14038190701395838. [Accessed 21st March 2024].
-4. Ofcom, “A decade of digital dependency by Ofcom,” 2 August 2018. [Online]. Available: https://www.ofcom.org.uk/about-ofcom/latest/features-and-news/decade-of-digital-dependency. [Accessed 28th April 2024].
+1. J. A. Knight, “Physical Inactivity: Associated Diseases and Disorders,” 2012. [Online]. Available: <http://www.annclinlabsci.org/content/42/3/320.full>. [Accessed 15th January 2024].
+2. M. A. Harris, “The relationship between physical inactivity and mental wellbeing: Findings from a gamification-based community-wide physical activity intervention,” 16 January 2018. [Online]. Available: <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5774736/>. [Accessed 17th February 2024].
+3. M. E. Donaghy, “Exercise can seriously improve your mental health: Fact or fiction?,” 6 March 2007. [Online]. Available: <https://www.tandfonline.com/doi/full/10.1080/14038190701395838>. [Accessed 21st March 2024].
+4. Ofcom, “A decade of digital dependency by Ofcom,” 2 August 2018. [Online]. Available: <https://www.ofcom.org.uk/about-ofcom/latest/features-and-news/decade-of-digital-dependency>. [Accessed 28th April 2024].
 5. N. C. K. and S. Panchanathan, “Analysis of low resolution accelerometer data for continuous human activity recognition,” in IEEE International Conference on Acoustics, Speech and Signal Processing, Las Vegas, NV, 2008.
 6. J. N. and T. K. Y. Hanai, “Haar-Like Filtering for Human Activity Recognition Using 3D Accelerometer,” in IEEE 13th Digital Signal Processing Workshop and 5th IEEE Signal Processing Education Workshop, Marco Island, FL, 2009.
 7. W. Y. and Y. C. and Q. L. L. Xu, “Human activity recognition based on random forests,” in 13th International Conference on Natural Computation, Fuzzy Systems and Knowledge Discovery , Guilin, 2017.
@@ -444,25 +455,25 @@ _References_
 13. S. W. P. and R. Malekian, “Human Activity Recognition using LSTM-RNN Deep Neural Network Architecture,” IEEE, Pretoria, South Africa., 2019.
 14. J. C. N. and Y. and X. L. T. Yu, “A Multi-Layer Parallel LSTM Network for Human Activity Recognition with Smartphone Sensors,” in 10th International Conference on Wireless Communications and Signal Processing, Hangzhou, 2018.
 15. T. D. T. N. et al., “Performance Analysis of Data Parallelism Technique in Machine Learning for Human Activity Recognition Using LSTM,” in 2019 IEEE International Conference on Cloud Computing Technology and Science (CloudCom), Sydney, Australia, 2019.
-16. T. A. M. and S. A.-Z. S. Albawi, “Understanding of a convolutional neural network,” 2017. [Online]. Available: https://ieeexplore.ieee.org/document/8308186. [Accessed 4th January 2024].
-17. M. Parekh, “A Brief Guide to Convolutional Neural Network(CNN),” 16th July 2019. [Online]. Available: https://medium.com/nybles/a-brief-guide-to-convolutional-neural-network-cnn- 642f47e88ed4. [Accessed 5th February 2024].
-18. A. S. Walia, “Activation functions and its types-Which is better?,” [Online]. Available: https://towardsdatascience.com/activation-functions-and-its-types-which-is-better- a9a5310cc8f. [Accessed 5th March 2024].
-19. Uniqtech, “Understand the Softmax Function in Minutes,” 30 January 2018. [Online]. Available: https://medium.com/data-science-bootcamp/understand-the-softmax-function-in- minutes-f3a59641e86d. [Accessed 5th April 2024].
-20. V. luhaniwal, “Forward propagation in neural networks — Simplified math and code version,” 7th May 2019. [Online]. Available: https://towardsdatascience.com/forward-propagation-in- neural-networks-simplified-math-and-code-version-bbcfef6f9250. [Accessed April 7th 2024].
-21. A. MOAWAD, “Neural networks and back-propagation explained in a simple way,” 1 Feb 2018. [Online]. Available: https://medium.com/datathings/neural-networks-and-backpropagation- explained-in-a-simple-way-f540a3611f5e. [Accessed 7th April 2024].
-22. V. Bushaev, “Adam – latest trends in deep learning optimization,” 22 October 2018. [Online]. Available: https://towardsdatascience.com/adam-latest-trends-in-deep-learning- optimization-6be9a291375c. [Accessed 4 February 2024].
-23. V. Bushaev, “Understanding RMSprop – faster neural network learning,” 2 September 2018. [Online]. Available: https://towardsdatascience.com/understanding-rmsprop-faster-neural- network-learning-62e116fcf29a. [Accessed 8 February 2024].
-24. P. Gufikandula, “Recurrent Neural Networks and LSTM explained,” 27 March 2019. [Online]. Available: https://medium.com/@purnasaigudikandula/recurrent-neural-networks-and-lstm- explained-7f51c7f6bbb9. [Accessed 2 November 2024].
-25. N. Arbel, “How LSTM networks solve the problem of vanishing gradients,” 21 December 2018. [Online]. Available: https://medium.com/datadriveninvestor/how-do-lstm-networks- solve-the-problem-of-vanishing-gradients-a6784971a577.[Accessed 10 April 2024].
-26. A. Budhiraja, “Dropout in (Deep) Machine learning,” 15 December 2015. [Online]. Available: https://medium.com/@amarbudhiraja/https-medium-com-amarbudhiraja-learning-less-to- learn-better-dropout-in-deep-machine-learning-74334da4bfc5. [Accessed 11 April 2024].
-27. N. et al. Srivastava, “Dropout: a simple way to prevent neural networks from overfitting,” 2014. [Online]. Available: http://jmlr.org/papers/v15/srivastava14a.html. [Accessed 11 April 2024].
-28. F. D, “Batch normalization in Neural Networks,” 20 October 2017. [Online]. Available: https://towardsdatascience.com/batch-normalization-in-neural-networks-1ac91516821c. [Accessed 12 April 2024].
-29. J. Wren, “How Do I Upsample and Downsample My Data?,” 27 January 2017. [Online]. Available: http://blog.prosig.com/2017/01/27/how-do-i-upsample-and-downsample-my-data/. [Accessed 7th April 2024].
-30. O. -. O. D. Science, “Layer-wise Relevance Propagation Means More Interpretable Deep Learning,” 1 January 2019. [Online]. Available: https://medium.com/@ODSC/layer-wise-relevance-propagation-means-more-interpretable-deep-learning-219ff5158914. [Accessed 7th April 2024].
-31. A. B. G. M. F. K. K.-R. M. W. S. Sebastian Bach, “On Pixel-Wise Explanations for Non-Linear Classifier Decisions by Layer-Wise Relevance Propagation,” 10 July 2015. [Online]. Available: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0130140#sec001. [Accessed 7th April 2024].
-32. V. T. M. W. and P. A. F. Y. Yang, “Explaining Therapy Predictions with Layer-Wise Relevance Propagation in Neural Networks,” 26 July 2018. [Online]. Available: https://ieeexplore-ieee-org.manchester.idm.oclc.org/document/8419358. [Accessed 9th April 2024].
-33. F. Chollet, “Keras,” [Online]. Available: https://keras.io.
-34. P. P. E. J. Travis Oliphant. [Online]. Available: https://scipy.org/scipylib/.
-35. M. A. et al., “"iNNvestigate neural networks",” 13 Aug 2018. [Online]. Available: https://arxiv.org/pdf/1808.04260.pdf. [Accessed 10 April 2024].
-36. W. Koehrsen, “Recurrent Neural Networks by Example in Python,” 5 November 2018. [Online]. Available: https://towardsdatascience.com/recurrent-neural-networks-by-example-in-python-ffd204f99470. [Accessed 2 February 2024].
-37. J. Brownlee, “A Gentle Introduction to the Rectified Linear Unit (ReLU) by Jason Brownlee,” 6 August 2019. [Online]. Available: https://machinelearningmastery.com/rectified-linear-activation-function-for-deep-learning-neural-networks/. [Accessed 12 February 2024].
+16. T. A. M. and S. A.-Z. S. Albawi, “Understanding of a convolutional neural network,” 2017. [Online]. Available: <https://ieeexplore.ieee.org/document/8308186>. [Accessed 4th January 2024].
+17. M. Parekh, “A Brief Guide to Convolutional Neural Network(CNN),” 16th July 2019. [Online]. Available: <https://medium.com/nybles/a-brief-guide-to-convolutional-neural-network-cnn-642f47e88ed4>. [Accessed 5th February 2024].
+18. A. S. Walia, “Activation functions and its types-Which is better?,” [Online]. Available: <https://towardsdatascience.com/activation-functions-and-its-types-which-is-better-a9a5310cc8f>. [Accessed 5th March 2024].
+19. Uniqtech, “Understand the Softmax Function in Minutes,” 30 January 2018. [Online]. Available: <https://medium.com/data-science-bootcamp/understand-the-softmax-function-in-minutes-f3a59641e86d>. [Accessed 5th April 2024].
+20. V. luhaniwal, “Forward propagation in neural networks — Simplified math and code version,” 7th May 2019. [Online]. Available: <https://towardsdatascience.com/forward-propagation-in-neural-networks-simplified-math-and-code-version-bbcfef6f9250>. [Accessed April 7th 2024].
+21. A. MOAWAD, “Neural networks and back-propagation explained in a simple way,” 1 Feb 2018. [Online]. Available: <https://medium.com/datathings/neural-networks-and-backpropagation-explained-in-a-simple-way-f540a3611f5e>. [Accessed 7th April 2024].
+22. V. Bushaev, “Adam – latest trends in deep learning optimization,” 22 October 2018. [Online]. Available: <https://towardsdatascience.com/adam-latest-trends-in-deep-learning-optimization-6be9a291375c>. [Accessed 4 February 2024].
+23. V. Bushaev, “Understanding RMSprop – faster neural network learning,” 2 September 2018. [Online]. Available: <https://towardsdatascience.com/understanding-rmsprop-faster-neural-network-learning-62e116fcf29a>. [Accessed 8 February 2024].
+24. P. Gufikandula, “Recurrent Neural Networks and LSTM explained,” 27 March 2019. [Online]. Available: <https://medium.com/@purnasaigudikandula/recurrent-neural-networks-and-lstm-explained-7f51c7f6bbb9>. [Accessed 2 November 2024].
+25. N. Arbel, “How LSTM networks solve the problem of vanishing gradients,” 21 December 2018. [Online]. Available: <https://medium.com/datadriveninvestor/how-do-lstm-networks-solve-the-problem-of-vanishing-gradients-a6784971a577.[Accessed> 10 April 2024].
+26. A. Budhiraja, “Dropout in (Deep) Machine learning,” 15 December 2015. [Online]. Available: <https://medium.com/@amarbudhiraja/https-medium-com-amarbudhiraja-learning-less-to-learn-better-dropout-in-deep-machine-learning-74334da4bfc5>. [Accessed 11 April 2024].
+27. N. et al. Srivastava, “Dropout: a simple way to prevent neural networks from overfitting,” 2014. [Online]. Available: <http://jmlr.org/papers/v15/srivastava14a.html>. [Accessed 11 April 2024].
+28. F. D, “Batch normalization in Neural Networks,” 20 October 2017. [Online]. Available: <https://towardsdatascience.com/batch-normalization-in-neural-networks-1ac91516821c>. [Accessed 12 April 2024].
+29. J. Wren, “How Do I Upsample and Downsample My Data?,” 27 January 2017. [Online]. Available: <http://blog.prosig.com/2017/01/27/how-do-i-upsample-and-downsample-my-data/>. [Accessed 7th April 2024].
+30. O. -. O. D. Science, “Layer-wise Relevance Propagation Means More Interpretable Deep Learning,” 1 January 2019. [Online]. Available: <https://medium.com/@ODSC/layer-wise-relevance-propagation-means-more-interpretable-deep-learning-219ff5158914>. [Accessed 7th April 2024].
+31. A. B. G. M. F. K. K.-R. M. W. S. Sebastian Bach, “On Pixel-Wise Explanations for Non-Linear Classifier Decisions by Layer-Wise Relevance Propagation,” 10 July 2015. [Online]. Available: <https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0130140#sec001>. [Accessed 7th April 2024].
+32. V. T. M. W. and P. A. F. Y. Yang, “Explaining Therapy Predictions with Layer-Wise Relevance Propagation in Neural Networks,” 26 July 2018. [Online]. Available: <https://ieeexplore-ieee-org.manchester.idm.oclc.org/document/8419358>. [Accessed 9th April 2024].
+33. F. Chollet, “Keras,” [Online]. Available: <https://keras.io>.
+34. P. P. E. J. Travis Oliphant. [Online]. Available: <https://scipy.org/scipylib/>.
+35. M. A. et al., “"iNNvestigate neural networks",” 13 Aug 2018. [Online]. Available: <https://arxiv.org/pdf/1808.04260.pdf>. [Accessed 10 April 2024].
+36. W. Koehrsen, “Recurrent Neural Networks by Example in Python,” 5 November 2018. [Online]. Available: <https://towardsdatascience.com/recurrent-neural-networks-by-example-in-python-ffd204f99470>. [Accessed 2 February 2024].
+37. J. Brownlee, “A Gentle Introduction to the Rectified Linear Unit (ReLU) by Jason Brownlee,” 6 August 2019. [Online]. Available: <https://machinelearningmastery.com/rectified-linear-activation-function-for-deep-learning-neural-networks/>. [Accessed 12 February 2024].
