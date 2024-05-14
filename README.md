@@ -355,9 +355,7 @@ _References_
 22. V. Bushaev, “Adam – latest trends in deep learning optimization,” 22 October 2018. [Online]. Available: https://towardsdatascience.com/adam-latest-trends-in-deep-learning- optimization-6be9a291375c. [Accessed 4 February 2024].
 23. V. Bushaev, “Understanding RMSprop – faster neural network learning,” 2 September 2018. [Online]. Available: https://towardsdatascience.com/understanding-rmsprop-faster-neural- network-learning-62e116fcf29a. [Accessed 8 February 2024].
 24. P. Gufikandula, “Recurrent Neural Networks and LSTM explained,” 27 March 2019. [Online]. Available: https://medium.com/@purnasaigudikandula/recurrent-neural-networks-and-lstm- explained-7f51c7f6bbb9. [Accessed 2 November 2024].
-25. N. Arbel, “How LSTM networks solve the problem of vanishing gradients,” 21 December 2018. [Online]. Available: https://medium.com/datadriveninvestor/how-do-lstm-networks- solve-the-problem-of-vanishing-gradients-a6784971a577.
-
- [Accessed 10 April 2024].
+25. N. Arbel, “How LSTM networks solve the problem of vanishing gradients,” 21 December 2018. [Online]. Available: https://medium.com/datadriveninvestor/how-do-lstm-networks- solve-the-problem-of-vanishing-gradients-a6784971a577.[Accessed 10 April 2024].
 26. A. Budhiraja, “Dropout in (Deep) Machine learning,” 15 December 2015. [Online]. Available: https://medium.com/@amarbudhiraja/https-medium-com-amarbudhiraja-learning-less-to- learn-better-dropout-in-deep-machine-learning-74334da4bfc5. [Accessed 11 April 2024].
 27. N. et al. Srivastava, “Dropout: a simple way to prevent neural networks from overfitting,” 2014. [Online]. Available: http://jmlr.org/papers/v15/srivastava14a.html. [Accessed 11 April 2024].
 28. F. D, “Batch normalization in Neural Networks,” 20 October 2017. [Online]. Available: https://towardsdatascience.com/batch-normalization-in-neural-networks-1ac91516821c. [Accessed 12 April 2024].
