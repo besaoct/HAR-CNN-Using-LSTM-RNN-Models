@@ -1,5 +1,55 @@
 # Human Activity Recognition Using CNN and LSTM RNN Models
 
+# Table of Contents
+
+- [Human Activity Recognition Using CNN and LSTM RNN Models](#human-activity-recognition-using-cnn-and-lstm-rnn-models)
+- [Table of Contents](#table-of-contents)
+    - [Technologies and Tools used](#technologies-and-tools-used)
+  - [Setup](#setup)
+  - [Abstract:](#abstract)
+  - [Chapter 1: Introduction](#chapter-1-introduction)
+    - [1.1 Background](#11-background)
+    - [1.2 Problem Statement](#12-problem-statement)
+    - [1.3 Motivation](#13-motivation)
+    - [1.4 Aim and Scope](#14-aim-and-scope)
+    - [1.5 Significance and Contributions](#15-significance-and-contributions)
+  - [Chapter 2: Literature Review](#chapter-2-literature-review)
+    - [2.2 Feature Extraction Techniques](#22-feature-extraction-techniques)
+    - [2.3 Wearable Devices and Data Collection](#23-wearable-devices-and-data-collection)
+    - [2.5 Smartphone Sensor Utilization](#25-smartphone-sensor-utilization)
+    - [2.6 Emergence of Deep Learning Models](#26-emergence-of-deep-learning-models)
+    - [2.7 Utilization of CNN and LSTM RNN Architectures](#27-utilization-of-cnn-and-lstm-rnn-architectures)
+    - [2.8 Enhancements in Model Performance](#28-enhancements-in-model-performance)
+  - [Chapter 3: Approach and Methodology](#chapter-3-approach-and-methodology)
+    - [3.1 Data Collection and Preprocessing](#31-data-collection-and-preprocessing)
+    - [3.2 Model Development](#32-model-development)
+    - [3.3 Training and Validation](#33-training-and-validation)
+    - [3.4 Testing on Unseen Data](#34-testing-on-unseen-data)
+    - [3.5 Analysis and Interpretation of Results](#35-analysis-and-interpretation-of-results)
+  - [Chapter 4: Datasets](#chapter-4-datasets)
+    - [4.1 SPHERE dataset](#41-sphere-dataset)
+    - [4.2 WISDM dataset](#42-wisdm-dataset)
+  - [Chapter 5: Theoretical Background](#chapter-5-theoretical-background)
+    - [5.1 Convolutional Neural Networks (CNNs)](#51-convolutional-neural-networks-cnns)
+    - [5.2 Long Short-Term Memory Recurrent Neural Network](#52-long-short-term-memory-recurrent-neural-network)
+    - [5.3 Resampling](#53-resampling)
+    - [5.4 Layer-wise Relevance Propagation](#54-layer-wise-relevance-propagation)
+    - [5.5 Method and Evaluation of Neural Networks](#55-method-and-evaluation-of-neural-networks)
+  - [Chapter 6: Results and Analysis](#chapter-6-results-and-analysis)
+    - [6.1 Application of Neural Networks on Labelled Dataset](#61-application-of-neural-networks-on-labelled-dataset)
+      - [6.1.1 Method and Evaluation of CNN](#611-method-and-evaluation-of-cnn)
+      - [6.1.2 Method and Evaluation of LSTM RNN](#612-method-and-evaluation-of-lstm-rnn)
+      - [6.1.3 Analysis of Neural Networks using Layer-wise Relevance Propagation (LRP)](#613-analysis-of-neural-networks-using-layer-wise-relevance-propagation-lrp)
+    - [6.2 Testing on Unseen Data](#62-testing-on-unseen-data)
+    - [6.3 Comparative Analysis of CNN and LSTM RNN](#63-comparative-analysis-of-cnn-and-lstm-rnn)
+    - [6.4 Interpretation](#64-interpretation)
+  - [Chapter 7: Conclusion and Future Work](#chapter-7-conclusion-and-future-work)
+    - [7.1 Conclusion](#71-conclusion)
+    - [7.2 Limitation](#72-limitation)
+    - [7.3 Future Work](#73-future-work)
+    - [_References_](#references)
+
+
 ### Technologies and Tools used 
 
 ![](https://img.shields.io/badge/Python-3.6-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=blue)
@@ -30,23 +80,6 @@ Data from WISDM's textfile was extracted using a small part (10 line code) of a 
 https://github.com/ni79ls/har-keras-cnn/blob/master/20180903_Keras_HAR_WISDM_CNN_v1.0_for_medium.py
 
 
-# Table of Contents
-
-- [Human Activity Recognition Using CNN and LSTM RNN Models](#human-activity-recognition-using-cnn-and-lstm-rnn-models)
-    - [Technologies and Tools used](#technologies-and-tools-used)
-  - [Setup](#setup)
-- [Table of Contents](#table-of-contents)
-  - [Abstract:](#abstract)
-  - [Chapter 1: Introduction](#chapter-1-introduction)
-  - [Chapter 2: Literature Review](#chapter-2-literature-review)
-  - [Chapter 3: Approach and Methodology](#chapter-3-approach-and-methodology)
-  - [Chapter 4: Datasets](#chapter-4-datasets)
-  - [Chapter 5: Theoretical Background](#chapter-5-theoretical-background)
-  - [Chapter 6: Results and Analysis](#chapter-6-results-and-analysis)
-  - [Chapter 7: Conclusion and Future Work](#chapter-7-conclusion-and-future-work)
-    - [_References_](#references)
-
-
 ## Abstract:
 
 This project focuses on the development and evaluation of Deep Learning models for accurately identifying human physical activities based on accelerometer data collected from smartphones or smartwatches. Specifically, we employ Long Short-Term Memory Recurrent Neural Networks (LSTM RNN) and Convolutional Neural Networks (CNN) to analyze time-series accelerometer data.
@@ -62,15 +95,15 @@ Overall, this research contributes to the understanding of Deep Learning approac
 
 ## Chapter 1: Introduction
 
-**1.1 Background**
+### 1.1 Background
 
 In recent years, wearable technology has undergone significant advancements, particularly in the realm of health monitoring. Devices such as smartwatches and smartphones, equipped with sensors like accelerometers, have become ubiquitous tools for collecting data on human activities. This passive data collection offers immense potential for enhancing medical diagnosis and monitoring by providing continuous insights into individuals' physical, mental, and cognitive health.
 
-**1.2 Problem Statement**
+### 1.2 Problem Statement
 
 Despite the promise of wearable devices in gathering rich datasets, a significant challenge persists in effectively translating this data into actionable information for medical professionals. Traditional diagnostic methods often rely on subjective self-reports from patients, which may be incomplete or biased. Consequently, there is a pressing need for robust and accurate methods to interpret accelerometer data and extract meaningful insights for healthcare practitioners.
 
-**1.3 Motivation**
+### 1.3 Motivation
 
 The rapid advancement of technology has revolutionized healthcare worldwide, significantly enhancing the quality of life for many individuals. Innovative hardware devices developed by scientists and engineers have enabled more accurate data measurement, essential for effective medical treatment. However, as the pace of engineering innovation stabilizes over time, optimizing the utilization of data generated by these devices becomes crucial for improving medical diagnosis efficiency.
 
@@ -80,19 +113,15 @@ Traditionally, diagnosing and monitoring patients' conditions relied heavily on 
 
 With right machine learning algorithms, the vast amounts of data collected from these devices can be effectively processed to extract valuable insights into individuals' physical, mental, and cognitive health. This transformative approach has the potential to revolutionize medical diagnosis and monitoring, offering personalized and data-driven healthcare solutions to a broader population.
 
-
-
-**1.4 Aim and Scope**
+### 1.4 Aim and Scope
 
 This major project aims to evaluate and compare the performance of two deep learning neural network models—Convolutional Neural Network (CNN) and Long Short-Term Memory (LSTM) Recurrent Neural Network (RNN)—in recognizing human activities using time series accelerometer data obtained from wearable devices. The accelerometer data collected from wearable devices serves as the passive data for this project. It measures acceleration along three different axes: X-axis (left to right), Y-axis (top to bottom), and Z-axis (front to back), with acceleration measured in units of g (where 1 g = 9.81 m/s²). Although data is collected at varying rates across different devices, for the purpose of training the classifier, the supplied data is sampled at 20Hz. However, when utilizing new datasets for testing the algorithm’s performance, data will be downsampled to 20 Hz to ensure consistency. The primary goal is to accurately classify the physical activity of individuals based on accelerometer data captured while they wear the device.
 
-
-**1.5 Significance and Contributions**
+### 1.5 Significance and Contributions
 
 Our research offers valuable insights that can lead to important changes in how we understand and approach medical diagnosis. By comparing two different types of neural network models—CNNs and LSTM RNNs—we aim to provide clear evidence of which model works better for recognizing human activities from accelerometer data. Additionally, our study uses a large dataset from the UK Biobank, which includes information from thousands of people. Through our work, we hope to provide practical knowledge that can improve the accuracy and reliability of systems designed to recognize human activities. These findings have the potential to make a meaningful impact in both academic and healthcare settings, paving the way for better diagnostic tools and practices.
 
 This introductory chapter has provided a comprehensive overview of the background, problem statement, aim, scope, and significance of the major project on Human Activity Recognition using CNN and LSTM RNN. Subsequent chapters will delve deeper into the methodology, experimentation, results, and discussion to fulfill the objectives outlined in this introduction.
-
 
 ## Chapter 2: Literature Review
 
@@ -101,32 +130,32 @@ The research for the creation of such a machine learning algorithm that can iden
 
 
 
-**2.2 Feature Extraction Techniques**
+### 2.2 Feature Extraction Techniques
 
 In [5], authors explored advanced feature extraction methods beyond basic statistical and spatial features present in accelerometer data. By leveraging the first-order derivative of acceleration signals and employing classifiers like boosted decision stumps, support vector machines, and regularized logistic regression, they achieved improved classification accuracies.
 The authors went beyond extracting the basic statistical (mean, variance, etc) and spatial features (entropy and energy) present within accelerometer data, and used the first order derivative of an acceleration signal to distinguish the variations within the signal. The acceleration data was divided into overlapping frames with features computed for each individual frame, which were then used to classify the activities using classifiers like boosted decision stumps, support vector machine and regularized logistic regression, with the extra feature extraction method producing a 2.5 – 3% increase in the overall classification accuracies.
 
 In [6], the authors proposed a new Haar-like filtering technique to use a difference filter combined with a variable filter to extract features from a 3D acceleration signal. A 1D filter with variable filter and shift width was used as the basis of Haar-like filtering. The resulting feature is the sum of the output Haar-like filtered signals with different shifted values and can be used on one axis only. An additional 1D Haar like filtering is carried out between the feature results from the two axes using the sum of their difference with appropriate shift values. An integral signal is introduced on to the final feature which concludes the overall Haar-like feature to be calculated using one addition, one subtraction and one bit-shift. The results produced an extremely high accuracy of 93.91%, reduced feature extraction costs by 21.22% comparatively, and resulted in a 17.8% less redundantly trained model.
 
-**2.3 Wearable Devices and Data Collection**
+### 2.3 Wearable Devices and Data Collection
 
 The authors in [7] identified that human activity recognition using computer vision through video surveillance etc causes privacy invasion, and therefore used a single wearable device for their research – a method that can be used universally and hence is more appropriate. Volunteers for data collection wore a Microsoft band 2 on their wrist for sample collection. 1500 and 800 samples for each activity were left for training and validating the model, respectively. Different number of decision tree classifiers were used, with 30 being the number that gave the highest overall accuracy of 90%.
 Addressing privacy concerns associated with computer vision-based approaches, [7] utilized a single wearable device, the Microsoft Band 2, for data collection. Employing decision tree classifiers, they achieved a high overall accuracy of 90% in HAR tasks, emphasizing the universality and practicality of wearable devices for data acquisition.
 
 
-**2.5 Smartphone Sensor Utilization**
+### 2.5 Smartphone Sensor Utilization
 
 In contrast, [8] leveraged smartphone accelerometers for HAR, employing support vector machines and real-time tracking on Android phones. Their model achieved a remarkable accuracy of 93.38%, showcasing the potential of smartphones as ubiquitous sensing platforms for HAR. Compared to wearable sensors, researchers in [8] used a smartphone’s accelerometer to classify physical activity using a machine learning method called support vector machine and to track it in real time using an android phone (OS). Data from the accelerometer, gyroscope, and accelerometer sensor linearity were collected and pre-processed. Multiple features like mean, standard deviation, and energy of signal were extracted to train the algorithm. For the real time processing of data, an interval of 3-5 seconds was needed for the model to make a prediction. This new model got an accuracy of 93.38% when used on the validation dataset.
 
 The above-mentioned techniques such as support vector machine or random forest classification are not preferred anymore as they need handcrafted features which are time consuming and add external bias to the data. Therefore, nowadays deep learning algorithms like CNNs and RNN are preferred as they do not need hand crafted features and can make use of a sequence of data streams.
 
-**2.6 Emergence of Deep Learning Models**
+### 2.6 Emergence of Deep Learning Models
 
 The rise of deep learning algorithms, particularly Convolutional Neural Networks (CNNs) and Long Short-Term Memory Recurrent Neural Networks (LSTM RNNs), has revolutionized activity recognition. Research in [9] showcased the superior performance of LSTM RNNs compared to traditional machine learning models.
 Research in [9] compared 9 different machine learning and deep learning algorithms to test their performance when it comes to human activity recognition. With more information fed available, deep learning models were deemed to almost always outperform machine learning models. The research concluded that deep learning models that utilised LSTM networks (explained in section 5.2) performed much better compared to other models.
 
 
-**2.7 Utilization of CNN and LSTM RNN Architectures**
+### 2.7 Utilization of CNN and LSTM RNN Architectures
 
 Researchers in South Korea [10] used a 1D CNN classifier to recognise human activity using a triaxial accelerometer’s data collected from user’s smartphones. The x, y, and z axis acceleration data were converted vector magnitudes and then fed into the neural network. It was then used to classify the user’s physical activity into three categories: walking, running, and staying still. The problem with normal human activity recognition is that the position of the device, e.g. user’s hand, user’s pocket, user’s bag, etc, can have a major impact on the rotational component within the triaxial acceleration data. To keep this to a minimum, the research team transformed the x, y, and z axis data into a single vector magnitude using the Euclidean norm x, y, and z using the following formula [10]: ||a|| = √(x^2 + y^2 + z^2)
 
@@ -137,8 +166,7 @@ Another research in China [11] compared the performance of a Convolutional Neuro
 A different way to recognising short-time physical activity was considered in [12], where a CNN was trained with an over-complete pattern library full of activity patterns collected by a wearable device using a method called sliding window. The CNN used the over-complete pattern library to extract the robust features of the data from it and gave a 95.52% accuracy on a validation set.
 A different deep learning model commonly used now when working with time series data is LSTM RNN – Long Short-Term Memory Recurrent Neural Networks. Generally, CNNs are more commonly used in deep learning but because people are utilising the benefits of LSTM cells much better now, the use of RNNs is on the rise as well. A research team in South Africa [13] used a LSTM RNN deep neural network architecture to classify 6 different activities based on the WISDM dataset described in section 2. The 6 activities were jogging, sitting, standing, walking, walking upstairs and walking downstairs. The x, y, and z axis were transformed into segments that lasted 10 seconds and then fed into the neural network as input. This ensured that there was ample amount of time to assign the data to the most common activity group found in that interval. It is also an appropriate enough time as in general an activity is performed for a period of time. The data was split using an 80:20 ratio for training and testing, and the remaining training data was split again into training and testing data using an 80:20 ratio – in order to have a validation dataset. Random selections of the training data were sub-sampled, used to train the model and tested on the validation set [13]. The model achieved results up to an accuracy of 90% after experimentation with different parameters.
 
-
-**2.8 Enhancements in Model Performance**
+### 2.8 Enhancements in Model Performance
 
 To address computational complexity and speed concerns, researchers in [14] proposed multi-layer parallel LSTM RNN models, achieving high accuracies while reducing computational complexity. Additionally, [15] explored data parallelism techniques on cloud computing platforms, resulting in significant computational time savings.
 
@@ -148,31 +176,30 @@ They trained and ran a LSTM RNN model on online CPUs and GPU and analysed how th
 
 This literature review underscores the diverse methodologies and advancements in HAR research, spanning from feature extraction techniques to deep learning approaches and scalability enhancements. By synthesizing insights from previous works, this chapter sets the stage for the subsequent analysis and development of novel HAR methodologies in this major project.
 
-
 ## Chapter 3: Approach and Methodology
 
-**3.1 Data Collection and Preprocessing**
+### 3.1 Data Collection and Preprocessing
 
 Collection of SPHERE Competition Dataset: The labelled dataset provided by the SPHERE competition, consisting of accelerometer data capturing human physical activities, will be obtained for training and validation purposes.
 Preprocessing of SPHERE Dataset: The collected dataset will undergo preprocessing steps such as normalization, noise removal, and feature extraction to prepare it for training the classifiers.
 Acquisition of WISDM Dataset: Additionally, the WISDM dataset, comprising accelerometer data from a different source, will be acquired for testing the trained models on unseen data.
 
-**3.2 Model Development**
+### 3.2 Model Development
 
 Convolutional Neural Network (CNN) Development: A CNN model will be designed and implemented for human activity recognition using the accelerometer data. The architecture of the CNN will consist of convolutional layers, pooling layers, and fully connected layers.
 Long Short-Term Memory Recurrent Neural Network (LSTM RNN) Development: An LSTM RNN model will be constructed to recognize human activities based on time series data. The LSTM architecture will include memory cells to capture temporal dependencies in the data.
 
-**3.3 Training and Validation**
+### 3.3 Training and Validation
 
 Training of CNN and LSTM RNN: The developed CNN and LSTM RNN models will be trained on the labelled dataset from the SPHERE competition. This process involves adjusting the model parameters using backpropagation and gradient descent to minimize the classification error.
 Validation of Trained Models: The trained models will be validated using a separate portion of the SPHERE dataset not used during training. This validation step ensures that the models generalize well to unseen data and evaluate their performance metrics such as accuracy, precision, and recall.
 
-**3.4 Testing on Unseen Data**
+### 3.4 Testing on Unseen Data
 
 Application of Trained Classifiers on WISDM Dataset: The optimized CNN and LSTM RNN classifiers will be applied to the WISDM dataset to predict human activities. This testing phase evaluates the generalization capability of the models to data from a different source.
 Comparative Analysis: The performance of each classifier on the WISDM dataset will be compared to determine which model performs better in recognizing human activities from accelerometer data.
 
-**3.5 Analysis and Interpretation of Results**
+### 3.5 Analysis and Interpretation of Results
 
 Evaluation Metrics: Various evaluation metrics such as accuracy, F1 score, and confusion matrices will be used to assess the performance of the CNN and LSTM RNN models.
 
@@ -182,16 +209,15 @@ By following these steps outlined in the approach and methodology, this study ai
 
 ## Chapter 4: Datasets
 
-**4.1 SPHERE dataset**
+### 4.1 SPHERE dataset
 
 The dataset provided by the SPHERE competition will be used to train the algorithm. The data available was measured on 10 people wearing accelerometers on their wrists performing multiple activities inside a designated location where they were monitored using RGB-Depth cameras. The video footage was used to classify their physical activities during the time they were monitored.
 Each participant was monitored for almost 30 minutes and so the data available is of approximately 5 hours. The accelerometer measured data at a sampling rate of 20 Hz and in the range of ± 8g. The physical activities are classified into 22 different categories: ascending stairs, descending stairs, jumping, walking with a load, walking, bending, kneeling, lying, sitting, squatting, standing, standing to bending, kneeling to standing, lying to sitting, sitting to lying, sitting to standing, standing to kneeling, standing to sitting, bending to standing, and turning.
 These 22 different activities come under 3 umbrella terms – ambulation activity (activity that requires continuous movement), static postures (when participants are stationary), and posture to posture transitions. These 22 different categories will be combined into 5 main categories for the purpose of training the model: walking, walking upstairs, walking downstairs, sitting, and standing.
 
-**4.2 WISDM dataset**
+### 4.2 WISDM dataset
 
 WISDM dataset is collected and provided by the Wireless Sensor Data Mining Lab which had collected the data from 36 different users using triaxial accelerometers. The sampling rate for its measured data is 20 Hz and the range within which the accelerometer measured the values is ± 2g. This dataset classified the physical activities into 6 different ones: walking, walking upstairs, walking downstairs, jogging, sitting and standing. When testing the algorithm on this labelled dataset, the jogging data will be removed as the algorithm will not have been trained on that data so will be unable to predict it from the accelerometer values. The distribution of these classes is as follows:
-
 
 | Activity          | Number of Samples | Proportion |
 |-------------------|-------------------|------------|
@@ -204,29 +230,27 @@ WISDM dataset is collected and provided by the Wireless Sensor Data Mining Lab w
 
 Table 1. The distribution of Activities within the WISDM dataset
 
-
 SPHERE’s dataset originally contained 22 different activities. They were combined into lesser number of categories in total because there are very few datasets available to validate this model based on those 22 different categories. As different datasets use different activities, the final number of activities that the training dataset should be combined into would depend on the dataset the model is to be validated on. The WISDM dataset contains 6 different activities – walking, jogging, standing, sitting, walking upstairs and walking downstairs. The WISDM dataset is generally considered very reliable when it comes to human activity recognition based on the number of researchers that have used it in their deep learning models. Therefore, it was chosen as the validation dataset and the activities of the training dataset were then to be combined accordingly. As there is no data present for jogging within the SPHERE dataset, the final 5 activities were chosen to be walking, standing, sitting, walking upstairs, and walking downstairs. Figure 1 below shows an example of what the triaxial accelerometer values look like for a physical activity.
 
 ![Figure 1. An example to show the accelerometer values of a physical activity](./data/images/fig1.png)
 
 Figure 1. An example to show the accelerometer values of a physical activity
 
-
-
 ## Chapter 5: Theoretical Background
 
-**5.1 Convolutional Neural Networks (CNNs)**
+### 5.1 Convolutional Neural Networks (CNNs)
+
 Convolutional Neural Networks are a type of neural networks primarily employed for image recognition tasks. They utilize the concept of local receptive fields to identify specific features within the input image, aiding in its classification among a set of diverse images. CNNs consist of multiple layers including the pooling layer, non-linearity layer, convolutional layer, and fully connected layer [16]. The term "convolutional" originates from the mathematical operation of convolution, where two functions combine to generate a third function. In this context, the input is convolved with a filter comprising trainable weights, which are adjusted using backpropagation, ultimately producing a feature map.
 
 The convolutional layer contains parameters (weights), whereas layers like pooling and fully connected layers do not [16]. This characteristic significantly enhances the performance of CNNs compared to traditional artificial neural networks by reducing the overall number of parameters. Structurally, a CNN comprises three main layers:
 
-Convolutional Layer: This layer is responsible for extracting essential features such as edges from the input image. As the network deepens, it identifies more complex features like shapes and digits [17]. It consists of two matrices: one representing a selected portion of the input data and the other representing a filter/kernel, which comprises learnable parameters. The kernel slides over the input data, producing a feature matrix with reduced dimensions and clearer features compared to the original input.
+- Convolutional Layer: This layer is responsible for extracting essential features such as edges from the input image. As the network deepens, it identifies more complex features like shapes and digits [17]. It consists of two matrices: one representing a selected portion of the input data and the other representing a filter/kernel, which comprises learnable parameters. The kernel slides over the input data, producing a feature matrix with reduced dimensions and clearer features compared to the original input.
 
-Pooling Layer: The primary function of this layer is to progressively reduce the size of the feature matrix, thereby reducing computational complexity. It aggregates dominant features within sections of the feature matrix, effectively downsampling the data [17]. This process helps in noise reduction and prevents overfitting by preserving essential features.
+- Pooling Layer: The primary function of this layer is to progressively reduce the size of the feature matrix, thereby reducing computational complexity. It aggregates dominant features within sections of the feature matrix, effectively downsampling the data [17]. This process helps in noise reduction and prevents overfitting by preserving essential features.
 
-Fully Connected Layer: After extracting and reducing the size of features, the image is flattened into a single column vector and fed into a feedforward neural network for classification [17]. The fully connected layers enable the establishment of non-linear dependencies within the network.
+- Fully Connected Layer: After extracting and reducing the size of features, the image is flattened into a single column vector and fed into a feedforward neural network for classification [17]. The fully connected layers enable the establishment of non-linear dependencies within the network.
 
-Activation Functions:
+- Activation Functions:
 Activation functions play a crucial role in neural networks by introducing non-linear transformations to the linear mappings between inputs and outputs [18]. They aid in predicting the most probable category by assigning probabilities to each output category. The three commonly used activation functions include sigmoid, Tanh (hyperbolic tangent), and ReLU (Rectified Linear Unit). ReLU has gained popularity due to its simplicity and effectiveness:
 
 𝐼𝑓 𝑥 < 0: 𝑅(𝑥) = 0	 ...(1)
@@ -235,7 +259,6 @@ Activation functions play a crucial role in neural networks by introducing non-l
 
 This formula represents the ReLU activation function, which returns 0 for negative input values and returns the input itself for non-negative input values.
 
- 
 This shows that the gradient of the graph of the function at any point will be either 0 or 1. At no point can the gradient saturate, hence this activation function avoids the vanishing gradient problem. Although the one negative aspect is that if a certain neuron never gets activated for any given input, the gradient will always be zero for it and a dead gradient problem may occur.
 The limitation with the rectified linear unit activation function is that it should only be used within the hidden layers of a neural network. Hence, for the last output layer of the convolutional neural network a Soft-max layer is used. The softmax function is able to convert the output of the last linear layer of a multi-class neural network into probabilities of which class is most likely to be the correctly predicted one [19]. It produces a probability distribution of the predicted classes – the sum of which should add up to one.
 When the three main layers – convolution layer, pooling layer and fully connected layer – are combined with an activation function and a softmax layer, the whole process of taking inputs first into the convolutional layer to getting the output at the output layer is called forward propagation. Each individual layer is given the input from the previous layer and processes it as per the activation function and passes each output to the next successive layer. Feed forward networks are important for forward propagation; in order for an output to be generated, it is imperative that no data is fed backwards in the network during the output generation cycle [20]. This takes place at each neuron in a hidden or output layer in two steps: pre-activation phase and activation phase.
@@ -251,7 +274,7 @@ Adam is an adaptive learning rate optimization algorithm that’s been designed 
 
 The whole process of forward and backward propagation is then repeated a number of times to get to a point where the neural network is adequately trained on the training data to be able to make predictions on similar information. It takes several iterations for the neural network to reach the right parameters to learn [21]. Each iteration is called an epoch. The number of epochs depends on a number of factors: quality of data, learning rate of the algorithm, complexity of the layers, optimization method used, and even the random initialization of the weights.
 
-**5.2 Long Short-Term Memory Recurrent Neural Network**
+### 5.2 Long Short-Term Memory Recurrent Neural Network
 
 LSTM RNN are a set of Neural Networks whose functions and way of working is inspired by the human brain. A Recurrent Neural Network differentiates from a normal Artificial Neural Network in the way that it specifically makes use of sequential information. If two images of a cat and dog are fed into an artificial neural network, the ANN will recognize a few patterns and predict an image to be of a dog or a cat. At no point did the ANN’s prediction depend on previous images. Each prediction of a dog or a cat would be based on the image itself and not the data before it.
 
@@ -348,13 +371,13 @@ these two are added as two trainable parameters – gamma and beta, respectively
 The dense layer is where the neural network has a neuron for every output expected. So, if there are 5 outputs, there will be 5 neurons in the dense layer. Each neuron will be connected to all the neurons in the layers previously, hence this densely populated connection layer is called a dense layer. This layer has its own weight matrix W, a bias vector b, and the activation of the previous layers.
 
 
-**5.3 Resampling**
+### 5.3 Resampling
 
 In order to remove the noise that ordinary analogue data carries due to the relative error of the machine that is recording that set of analogue data, sometimes resampling techniques are applied. Resampling is a process where a discrete signal is converted to a similar representation of the signal itself. Resampling can be needed when, for example, the data provided was measured at a different frequency than what the neural network wants to make predictions on. There are two methods of going about resampling: upsampling and downsampling.
 Downsampling is done by the recalculation of the values of a new signal at a lower frequency than the original high frequency signal. The general idea would be to remove samples from within the data whilst maintaining its data integrity. In order to prevent high frequency signals from subjecting the new signal with aliasing distortion, it is important to pass the signal through a low- pass filter as well to remove the appropriate high frequency content [29].
 In upsampling, samples are added to the original signal and its length with respect to time is maintained [29]. When increasing the number of samples, there is no issue of aliasing as no extra content has been added – only the sample points have been increased. Upsampling is usually done through interpolation where a value between two known data points is estimated.
 
-**5.4 Layer-wise Relevance Propagation**
+### 5.4 Layer-wise Relevance Propagation
 
 Generally, neural networks are applied to problems using a blackbox method where an input of any sort, for example an image, goes into the blackbox which is the neural network, and then a prediction comes out of that said blackbox [30]. This approach has produced good results for quite a while now, but when expanding the application of these models onto real world problems it is extremely important to understand how and why those decisions are made by the neural network.
 This can be imperative for many situations where the stakes are unusually high, and an incorrect decision can cause serious damage to people. For example, deep learning models are nowadays applied on medical scans to predict if a patient has a certain disease or not. There can be many situations during the training process where the accuracy of the neural network’s prediction might be very reliable, but it might be picking up a unique thing within the data it was trained on, and so may miss out when that certain type of data is not present within a test scan of a patient who in fact may have the disease. This proves that interpretability of a neural network’s prediction, understand why and how it has made that decision, is extremely important [30]. This can help establish trust and validation on deep learning models which can then boost their use in medical diagnosis or autonomous cars etc.
@@ -362,7 +385,7 @@ A recent approach to understand the decision making of a neural network has been
 maps [31]. This enables a researcher to verify that prediction, validate the decision-making process by understanding how that prediction was made using appropriate data, and to observe if there was any new information identified that may be of further interest.
 As neural networks are multi-dimensional models where multiple hidden layers are able to have many significant interactions with all input features [32]. As a single input feature can have multiple paths to influence an output, an approach towards the explainability of the decision making of neural networks is needed where that is taken into account. In LRP, the predicted probability of a specific target is deconstructed into a set of relevant scores which are then redistributed onto the neurons of the previous layer [32]. The strength of a neuron’s connection – judged by its weight – and the activation of a neuron make up the said relevant score [32]. This relevant score then shows how much an individual neuron was contributing towards the end result at the output neuron based on a certain input feature. And as this technique is applied repeatedly over all layers – output layer to input layer – a relevance score for each neuron is generated.
 
-**5.5 Method and Evaluation of Neural Networks**
+### 5.5 Method and Evaluation of Neural Networks
 
 The method for implementing the classification of these activities and the evaluation of that classification is done after the dataset is split into the training set and the testing set. The splitting of this dataset is done in such a way that 80% of the data is used for training of the classifier while 20% of it is used for testing the classification. In order to avoid the overfitting of the model, there will be a separate validation set as well to test the classifier on to understand its general capabilities as well.
 There will be two sets of major indicators that will be used to test the ability of the classifier and to evaluate its results:
@@ -383,9 +406,9 @@ In a larger confusion matrix, the best results are when the left top to right bo
 
 ## Chapter 6: Results and Analysis
 
-**6.1 Application of Neural Networks on Labelled Dataset**
+### 6.1 Application of Neural Networks on Labelled Dataset
 
-**6.1.1 Method and Evaluation of CNN**
+#### 6.1.1 Method and Evaluation of CNN
 
 The following diagram describes the architecture and parameters used in the Convolutional Neural Network created for this project:
 
@@ -442,7 +465,7 @@ Figure 13 shows how the cost function of the model’s loss value changes over t
 Therefore, the value of dropout was increased from 0.2 to 0.5 and the second convolutional layer was removed. The two solutions were performed individually in order for the effects to be observed. Increasing the dropout reduced the difference in the loss functions of the training and testing data. The overall performance on each activity was not majorly affected either and the model produced similar results. However, when the second convolutional layer was reduced, the overall accuracy of the program did not get affected, however its performance on individual activities was reduced as only the standing activity was predicted to a high accuracy. This points towards the model not being able to learn the patterns of each activity correctly. Hence only the dropout was increased to 0.5, the epochs were reduced from 100 to 20, but the number of convolutional layers were kept the same.
 These changes did not drastically change the model’s performance on the testing set – as it only improved the overall accuracy from 75% to 76%. However, the model’s performance on the validation set improved from 21% to 30%. This improvement on the validation set was reflected in different activities – walking’s accuracy improved from 21% to 32%, standing’s accuracy improved from 26% to 39%, sitting’s accuracy remained the same, while walking upstairs and downstairs had a few samples predicted correctly even though as a percentage it was less than 5% for both.
 
-**6.1.2 Method and Evaluation of LSTM RNN**
+#### 6.1.2 Method and Evaluation of LSTM RNN
 
 The stacked architecture of the LSTM used for the multiple classification of Human Activity Recognition can be seen in the following schematic:
 
@@ -456,7 +479,6 @@ The parameters used in the above architecture are explained below:
 - LSTM Layer: Four LSTM network layers were added to the network. Each layer had 100 units or neurons added to them. Dropout of 25% was added to each individual LSTM layer to prevent overfitting.
 Batch Normalization: As mentioned in section 3.2, batch normalization helps in speeding up the training process hence batch normalization is added to the model.
 - Fully connected layer: A dense layer is added to complete the model. 5 units are added to this layer to represent the 5 different classifications.
-
 
 This architecture was implemented using Python and Keras – an open source library for building neural networks [33]. A sequential model was used with multiple LSTM, Dense, Dropout and Batch Normalisation layers. The input layer had 100 neurons, with 3 more LSTM layers stacked on to it in order to allow for the establishment of a pattern and dependencies between the input data and the corresponding activities. An output layer with 5 neurons for the 5 different classification was added at the end. The final model is then trained for 100 epochs using the Adam optimizer, with the default learning rate of 0.002 and the loss function of mean squared error. The model is trained ofline on a CPU 2.3 GHz processing power, Dual-Core Intel Core i5 with 8GB memory. However, it would take more than 6 to 7 hours to train the LSTM RNN model as the MacBook’s CPU was not powerful enough. Therefore, when testing and running the algorithm, Google Cloud Platform’s virtual machines were also used to speed up that procedure. The virtual machine had 2 vCPUs with 13 Gb memory and also had 4 NVIDIA Tesla P100 GPUs which boasted its performance. The rest of the procedure in terms of pre-processing, testing, training and validating the classifier was exactly the same as the procedure used for the CNN model to maintain consistency across both models. 8 people’s data from the SPHERE competition was used to train the algorithm, 2 people’s data was used to test it and then finally the WISDM dataset was used to validate the model.
 The LSTM RNN got an accuracy of between 65 and 70% when it was compiled multiple times. The results can be analysed for each individual activity using the confusion matrix from figure 15. The LSTM model has the same trend as the CNN model where it is able to classify stationary activities such as sitting and standing to a good extent but struggles with activities involving lots of motion like walking, walking upstairs and walking downstairs.
@@ -482,7 +504,7 @@ Figure 18. Graph of the loss function of the LSTM model the against number of ep
 
 Figure 17 shows how the accuracy of the model on the training and testing set changed over the range of epochs. The model’s peak accuracy on the training set comes around 40-50 epochs where there is less disparity between the testing set accuracy and the training set accuracy. Therefore, to reduce the disparity between the loss functions and maintain a good accuracy, the number of epochs were reduced to 42 which improved the overall accuracy. Multiple runs must also be performed by increasing the dropout to observe the effects of that on the accuracy. However as one run of the model takes a long time to execute not only on the local computer used but also on a virtual machine on google cloud, time constraints inhibited the completion of this experimentation.
 
-6.1.3 Analysis of Neural Networks using Layer-wise Relevance Propagation (LRP)
+#### 6.1.3 Analysis of Neural Networks using Layer-wise Relevance Propagation (LRP)
 
 The LRP technique, as described in section 3.4, is used to analyse the decision making of a neural network. The innvestigate library was used to analyse the model [35]. Due to the limitation of LRP, it is only possible to apply it to the CNN model. LRP was applied to 2 neurons within the CNN for each outcome from the testing set to understand how well the model followed the value of the accelerometer from each axis. The test set is pretty large and the ofline machine that the model is compiled on was deemed not powerful enough to run the analysis on the whole set. Therefore, due to time and CPU resources being an issue, the LRP technique was only applied to two neurons in two limited parts of the testing set: accurately predicted activity of standing (83%) and relatively inaccurately predicted activity of walking (35%). It was only applied to both activities for about 10 continuous samples.
 
@@ -500,29 +522,28 @@ Figure 20. Graph showing the relevance between the accelerometer’s values and 
 
 A lot more analysis can be carried out using LRP. Due to reasons mention at the start of the report in appendix A, it was not possible to continue further analysis. These further steps will be mentioned in section 5.3 as future work that can be carried out.
 
+### 6.2 Testing on Unseen Data
 
-**6.2 Testing on Unseen Data**
+- Application of Optimized Classifiers: The CNN and LSTM RNN classifiers optimized on the labelled dataset will be applied to the unseen data from the WISDM dataset.
+- Evaluation of Generalization: The generalization capability of the classifiers will be assessed by evaluating their performance on the WISDM dataset and comparing it to their performance on the labelled dataset.
+- Analysis of Results: The results obtained from testing on unseen data will be analyzed to determine the classifiers' ability to generalize to new data sources and identify any discrepancies in performance.
 
-   - Application of Optimized Classifiers: The CNN and LSTM RNN classifiers optimized on the labelled dataset will be applied to the unseen data from the WISDM dataset.
-   - Evaluation of Generalization: The generalization capability of the classifiers will be assessed by evaluating their performance on the WISDM dataset and comparing it to their performance on the labelled dataset.
-   - Analysis of Results: The results obtained from testing on unseen data will be analyzed to determine the classifiers' ability to generalize to new data sources and identify any discrepancies in performance.
+### 6.3 Comparative Analysis of CNN and LSTM RNN
 
-**6.3 Comparative Analysis of CNN and LSTM RNN**
+- Performance Metrics Comparison: The performance metrics obtained from testing on both the labelled dataset and the unseen WISDM dataset will be compared between the CNN and LSTM RNN models.
+- Discussion of Differences: Any differences in performance between the CNN and LSTM RNN classifiers will be discussed, considering factors such as model complexity, training data characteristics, and generalization ability.
 
-   - Performance Metrics Comparison: The performance metrics obtained from testing on both the labelled dataset and the unseen WISDM dataset will be compared between the CNN and LSTM RNN models.
-   - Discussion of Differences: Any differences in performance between the CNN and LSTM RNN classifiers will be discussed, considering factors such as model complexity, training data characteristics, and generalization ability.
+### 6.4 Interpretation
 
-**6.4 Interpretation**
-
-   - Interpretation of Results: The overall results obtained from the experimentation will be interpreted in the context of the research objectives and hypotheses.
-   - A conclusive summary of the findings will be provided, highlighting the effectiveness of the CNN and LSTM RNN models in predicting human activities based on accelerometer data.
-   - Potential avenues for future research and improvements to the proposed models will be discussed, based on the insights gained from the study.
+- Interpretation of Results: The overall results obtained from the experimentation will be interpreted in the context of the research objectives and hypotheses.
+- A conclusive summary of the findings will be provided, highlighting the effectiveness of the CNN and LSTM RNN models in predicting human activities based on accelerometer data.
+- Potential avenues for future research and improvements to the proposed models will be discussed, based on the insights gained from the study.
 
 By conducting a comprehensive analysis of the results obtained from the application of neural networks on both the labelled dataset and unseen data, this chapter aims to provide valuable insights into the performance and capabilities of the CNN and LSTM RNN classifiers for human activity recognition.
 
 ## Chapter 7: Conclusion and Future Work
 
-7.1 Conclusion
+### 7.1 Conclusion
 
 In this Final Year individual project two different classifiers, an LSTM RNN and a 1D CNN, were looked at to see how each of them perform when it comes to Human Activity Recognition using accelerometer data. Both networks were trained on the SPHERE dataset, tested on the SPHERE dataset and then validated using WISDM’s dataset. The activities they were trained and tested on were both stationary (sitting and standing) and mobile (walking, walking upstairs, walking downstairs). These activities were chosen as they last for a few seconds and then therefore a correlation between the activity and the accelerometer value may be established by the Neural Networks.
 
@@ -532,13 +553,13 @@ From the results the preconceived notion that Long Short-Term Memory Cell Recurr
 
 - However, the accuracies and the resultant predictions went down when tested on dataset that the neural networks had not been trained on. The LSTM RNN got an accuracy of 50% on the separate dataset whereas the CNN got an accuracy of up to 21% on it. Therefore, the generalisation capability of both networks is weak.
 
-7.2 Limitation
+### 7.2 Limitation
 
 - The classifier is trained on SPHERE’s dataset which is sampled at 20 Hz. The WISDM dataset is also sampled at 20 Hz so this is not a problem here, but if other datasets are used for testing and those datasets have values sampled at a higher rate, they will have to be down sampled which will result in a loss of information. This is one of the limitations of this project in terms of future work.
 - Another limitation of this work is that the trained and test dataset were both different in terms of the activities they had present in them, with the SPHERE dataset initially having 22 different classification and the WISDM dataset having 6 different classifications.
 - Both neural networks need to be fully analysed using techniques like LRP – Layer-wise relevance propagation – to fully understand how or why they are making decisions the way they are. However, as this is very new research in terms of LSTM RNNs, it couldn’t be implemented on it. This method will be applied to the CNN and if there are further steps needed and isn’t completed, those will be mentioned as steps that were not possible to be implemented considering the time limited schedule of the Individual Project.
 
-7.3 Future Work
+### 7.3 Future Work
 
 - In the future, the datasets that must be chosen for training and testing of the classifiers must be chosen wisely. It is better for training and testing datasets to be as similar as possible in order to understand if the classifier is built and trained properly. However, this will limit the generalisation capability of the classifier.
 
