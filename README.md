@@ -1,8 +1,8 @@
 # Human Activity Recognition Using CNN and LSTM RNN Models
 
 ### Technologies and Tools used 
-&#x1f6e0;
-![](https://img.shields.io/badge/Python-3.6-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a)
+
+![](https://img.shields.io/badge/Python-3.6-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=red)
 ![](https://img.shields.io/badge/TensorFlow-2.0-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a)
 ![](https://img.shields.io/badge/Keras-2.3.0-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a)
 ![](https://img.shields.io/badge/GoogleCloudPlatform-VirtualMachines-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a)
