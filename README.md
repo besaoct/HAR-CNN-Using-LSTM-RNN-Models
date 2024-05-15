@@ -7,7 +7,7 @@
 ![](https://img.shields.io/badge/Keras-2.3.0-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=violet)
 ![](https://img.shields.io/badge/GoogleCloudPlatform-VirtualMachines-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=violet)
 ![](https://img.shields.io/badge/Spyder-4.1-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=violet)
-![](https://img.shields.io/badge/Jupyter--informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=black)
+![](https://img.shields.io/badge/Jupyter--informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=red)
 
 
 ## Setup
