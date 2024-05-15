@@ -47,7 +47,7 @@
     - [7.1 Conclusion](#71-conclusion)
     - [7.2 Limitation](#72-limitation)
     - [7.3 Future Work](#73-future-work)
-    - [_References_](#references)
+  - [_References_](#references)
 
 
 ### Technologies and Tools used 
@@ -565,7 +565,7 @@ From the results the preconceived notion that Long Short-Term Memory Cell Recurr
 
 - The dataset chosen for training should have each activity present in relatively equal proportions. This might not be possible as human beings perform each activity on a different proportion daily, however in terms of training the classifier this has an adverse effect as classifiers are unable to identify the activities that are rarely performed due to lack of training data
 
-### _References_
+## _References_
 
 1. J. A. Knight, “Physical Inactivity: Associated Diseases and Disorders,” 2012. [Online]. Available: <http://www.annclinlabsci.org/content/42/3/320.full>. [Accessed 15th January 2024].
 2. M. A. Harris, “The relationship between physical inactivity and mental wellbeing: Findings from a gamification-based community-wide physical activity intervention,” 16 January 2018. [Online]. Available: <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5774736/>. [Accessed 17th February 2024].
