@@ -29,6 +29,24 @@ The following files were generated as a result of that data preprocessing on the
 Data from WISDM's textfile was extracted using a small part (10 line code) of a tutorial from the following repository:
 https://github.com/ni79ls/har-keras-cnn/blob/master/20180903_Keras_HAR_WISDM_CNN_v1.0_for_medium.py
 
+
+# Table of Contents
+
+- [Human Activity Recognition Using CNN and LSTM RNN Models](#human-activity-recognition-using-cnn-and-lstm-rnn-models)
+    - [Technologies and Tools used](#technologies-and-tools-used)
+  - [Setup](#setup)
+- [Table of Contents](#table-of-contents)
+  - [Abstract:](#abstract)
+  - [Chapter 1: Introduction](#chapter-1-introduction)
+  - [Chapter 2: Literature Review](#chapter-2-literature-review)
+  - [Chapter 3: Approach and Methodology](#chapter-3-approach-and-methodology)
+  - [Chapter 4: Datasets](#chapter-4-datasets)
+  - [Chapter 5: Theoretical Background](#chapter-5-theoretical-background)
+  - [Chapter 6: Results and Analysis](#chapter-6-results-and-analysis)
+  - [Chapter 7: Conclusion and Future Work](#chapter-7-conclusion-and-future-work)
+    - [_References_](#references)
+
+
 ## Abstract:
 
 This project focuses on the development and evaluation of Deep Learning models for accurately identifying human physical activities based on accelerometer data collected from smartphones or smartwatches. Specifically, we employ Long Short-Term Memory Recurrent Neural Networks (LSTM RNN) and Convolutional Neural Networks (CNN) to analyze time-series accelerometer data.
