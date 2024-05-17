@@ -625,7 +625,7 @@ This section provides the code used in the major project experiment(s), includin
 
 ### 1. `cnn.py`
 
-`cnn.py` program used in your major project experiment:
+`cnn.py` program used in our major project experiment:
 
 ```python
 import numpy as np
