@@ -1,3 +1,5 @@
+# this is final_lstm_rnn.py
+
 #importing the required libraries
 import numpy as np
 import pandas as pd

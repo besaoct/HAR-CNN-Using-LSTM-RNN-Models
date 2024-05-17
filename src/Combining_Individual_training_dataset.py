@@ -1,3 +1,5 @@
+# Combining_Indidual_training_dataset.py: This file is used for data preprocessing.
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -9,7 +11,7 @@ User_1 = pd.DataFrame(User_1.iloc[:, 1:6].values)
 User_1.columns = ["Activity", "Timeframe", "X axis", "Y axis", "Z axis"]
 User_1["Timeframe"] = User_1["Timeframe"] - 0.017856
 
-"""Export_csv = User_1.to_csv(r'/Users/talhajamal/Documents/Year 3/Individual Project/Files for project/User_1.csv')
+"""Export_csv = User_1.to_csv(r'/Users/tahirabanoo/Documents/Year 3/Individual Project/Files for project/User_1.csv')
 """
 
 #For User 2
@@ -46,7 +48,7 @@ User_2.columns = ["Activity","Timeframe", "X axis", "Y axis", "Z axis", "Timedif
 User_2 = User_2.iloc[446:32897,]
 
 #exporting file
-Export_User2_csv = User_2.to_csv(r'/Users/talhajamal/Documents/Year 3/Individual Project/Files for project/User_2.csv')
+Export_User2_csv = User_2.to_csv(r'/Users/tahirabanoo/Documents/Finalyear/Project/Files for project/User_2.csv')
 
 
 #For User 3
@@ -84,7 +86,7 @@ User_3_annotations.columns = ["Start", "End", "Activity", "Type"]
 User_3 = User_3.iloc[1604:31228,]
 
 #exporting file
-Export_User3_csv = User_3.to_csv(r'/Users/talhajamal/Documents/Year 3/Individual Project/Files for project/Final Training Dataset/User_3.csv')
+Export_User3_csv = User_3.to_csv(r'Users/tahirabanoo/Documents/Finalyear/Project/Files for project/Final Training Dataset/User_3.csv')
 
 
 
@@ -124,7 +126,7 @@ User_4_annotations.columns = ["Start", "End", "Activity", "index"]
 User_4 = User_4.iloc[562:30679,]
 
 #exporting file
-Export_User4_csv = User_4.to_csv(r'/Users/talhajamal/Documents/Year 3/Individual Project/Files for project/Final Training Dataset/User_4.csv')
+Export_User4_csv = User_4.to_csv(r'Users/tahirabanoo/Documents/Finalyear/Project/Files for project/Final Training Dataset/User_4.csv')
 
 
 #For User 5
@@ -163,7 +165,7 @@ User_5_annotations.columns = ["Start", "End", "Activity", "index"]
 User_5 = User_5.iloc[950:30633,]
 
 #exporting file
-Export_User5_csv = User_5.to_csv(r'/Users/talhajamal/Documents/Year 3/Individual Project/Files for project/Final Training Dataset/User_5.csv')
+Export_User5_csv = User_5.to_csv(r'Users/tahirabanoo/Documents/Finalyear/Project/Files for project/Final Training Dataset/User_5.csv')
 
 
 #For User 6
@@ -202,7 +204,7 @@ User_6_annotations.columns = ["Start", "End", "Activity", "index"]
 User_6 = User_6.iloc[717:17329,]
 
 #exporting file
-Export_User6_csv = User_6.to_csv(r'/Users/talhajamal/Documents/Year 3/Individual Project/Files for project/Final Training Dataset/User_6.csv')
+Export_User6_csv = User_6.to_csv(r'Users/tahirabanoo/Documents/Finalyear/Project/Files for project/Final Training Dataset/User_6.csv')
 
 
 #For User 7
@@ -241,7 +243,7 @@ User_7_annotations.columns = ["Start", "End", "Activity", "index"]
 User_7 = User_7.iloc[152:29269,]
 
 #exporting file
-Export_User7_csv = User_7.to_csv(r'/Users/talhajamal/Documents/Year 3/Individual Project/Files for project/Final Training Dataset/User_7.csv')
+Export_User7_csv = User_7.to_csv(r'Users/tahirabanoo/Documents/Finalyear/Project/Files for project/Final Training Dataset/User_7.csv')
 
 
 #For User 8
@@ -280,7 +282,7 @@ User_8_annotations.columns = ["Start", "End", "Activity", "index"]
 User_8 = User_8.iloc[837:30073,]
 
 #exporting file
-Export_User8_csv = User_8.to_csv(r'/Users/talhajamal/Documents/Year 3/Individual Project/Files for project/Final Training Dataset/User_8.csv')
+Export_User8_csv = User_8.to_csv(r'Users/tahirabanoo/Documents/Finalyear/Project/Files for project/Final Training Dataset/User_8.csv')
 
 
 #For User 9
@@ -319,7 +321,7 @@ User_9_annotations.columns = ["Start", "End", "Activity", "index"]
 User_9 = User_9.iloc[210:27920,]
 
 #exporting file
-Export_User9_csv = User_9.to_csv(r'/Users/talhajamal/Documents/Year 3/Individual Project/Files for project/Final Training Dataset/User_9.csv')
+Export_User9_csv = User_9.to_csv(r'Users/tahirabanoo/Documents/Finalyear/Project/Files for project/Final Training Dataset/User_9.csv')
 
 #For User 10
 
@@ -357,4 +359,4 @@ User_10_annotations.columns = ["Start", "End", "Activity", "index"]
 User_10 = User_10.iloc[260:32899,]
 
 #exporting file
-Export_User10_csv = User_10.to_csv(r'/Users/talhajamal/Documents/Year 3/Individual Project/Files for project/Final Training Dataset/User_10.csv')
+Export_User10_csv = User_10.to_csv(r'/Users/tahirabanoo/Documents/Finalyear/Project/Files for project/Final Training Dataset/User_10.csv')

@@ -1,3 +1,5 @@
+# Final_Training_Set.py: This file is used for data preprocessing.
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -18,7 +20,7 @@ user_10 = pd.read_csv('User_10.csv')
 #user_1 = pd.DataFrame(user_1.iloc[:34247,:].values)
 #user_1.columns = ["User", "Activity", "Timeframe", "X axis", "Y axis", "Z axis"]
 ##user_1["Timeframe"] = user_1["Timeframe"] - 45.944096
-#Export_csv = user_1.to_csv(r'/Users/talhajamal/Documents/Year 3/Individual Project/Files for project/Final Training Dataset/User_1.csv')
+#Export_csv = user_1.to_csv(r'/Users/tahirabanoo/Documents/Finalyear/Project/Files for project/Final Training Dataset/User_1.csv')
 #User_2 = User_2.to_numpy()
 #User_2 = pd.DataFrame(User_2)
 
@@ -167,12 +169,12 @@ Final_Training_set = pd.concat([Final_Training_set, user_8])
 
 
 #Exporting Final Training Dataset
-Export_csv = Final_Training_set.to_csv(r'/Users/talhajamal/Documents/Year 3/Individual Project/Files for project/Final Training Dataset/final_training_set_8people.csv')
+Export_csv = Final_Training_set.to_csv(r'/Users/tahirabanoo/Documents/Finalyear/Project/Files for project/Final Training Dataset/final_training_set_8people.csv')
 
 
 #Creating Testset from User 9 and 10
 Final_Test_set = pd.concat([user_9, user_10])
-Export2_csv = Final_Test_set.to_csv(r'/Users/talhajamal/Documents/Year 3/Individual Project/Files for project/Final Training Dataset/final_test_set_2people.csv')
+Export2_csv = Final_Test_set.to_csv(r'/Users/tahirabanoo/Documents/Finalyear/Project/Files for project/Final Training Dataset/final_test_set_2people.csv')
 
 
 
