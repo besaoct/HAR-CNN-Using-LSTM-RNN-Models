@@ -623,7 +623,6 @@ From the results the preconceived notion that Long Short-Term Memory Cell Recurr
 
 This section provides the code used in the major project experiment(s), including data preprocessing and model training.
 
-
 1. cnn.py
 
 `cnn.py` program used in your major project experiment:
