@@ -11,7 +11,7 @@ User_1 = pd.DataFrame(User_1.iloc[:, 1:6].values)
 User_1.columns = ["Activity", "Timeframe", "X axis", "Y axis", "Z axis"]
 User_1["Timeframe"] = User_1["Timeframe"] - 0.017856
 
-"""Export_csv = User_1.to_csv(r'/Users/tahirabanoo/Documents/Year 3/Individual Project/Files for project/User_1.csv')
+"""Export_csv = User_1.to_csv(r'/Users/tahirabanoo/Documents/Finalyear/Project/Files for project/User_1.csv')
 """
 
 #For User 2
