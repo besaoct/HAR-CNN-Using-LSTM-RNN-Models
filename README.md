@@ -469,6 +469,8 @@ Figure 12. Graph the accuracy of the models against the number of epochs
 
 Figure 12 show how well the model learned on the test data as the number of epochs were increased. The model shows that it learns well over time as the accuracy on the training set increases from 70% to 97% over 100 epochs, although there is not much improvement after 20 epochs. Moreover, the accuracy on the testing set does not improve in this range of epochs. The model seems to be consistent in its accuracy on the testing set as it remains approximately at 75%.
 
+![Figure](./data/images/fig13.png)
+
 Figure 13. Graph of the loss function of the CNN against number of epochs
 
 Figure 13 shows how the cost function of the model’s loss value changes over time. The loss for the training set reduces over time whereas the loss for the testing set increases. This points out to the fact that the model may be being overfitted on the data. A solution to this problem is to increase the value of dropout and to reduce the size of the network by reducing the number of layers.
